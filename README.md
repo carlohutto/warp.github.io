@@ -3,7 +3,7 @@
 This repository hosts the official website for **WARP**, published via GitHub Pages.
 
 ## 🌐 Live Site
-Visit the website here: [https://carlos.github.io](https://warp.github.io)
+Visit the website here: [https://warp.github.io](https://warp.github.io)
 
 
 ## 📄 Project Overview
