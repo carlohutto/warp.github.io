@@ -1,13 +1,4 @@
-Place image files used by the site in this folder.
-
-Required filenames (place the corresponding image files here):
-
-- `hero.jpg` — Hero background image (used in the top section)
-- `mission.jpg` — Image for the Mission section
-- `job-readiness.jpg` — Image for Job Readiness & Training program card
-- `housing-assistance.jpg` — Image for Housing Assistance program card
-- `harm-reduction.jpg` — Image for Harm Reduction Awareness program card
-- `picture-me-rollin.jpg` — Image for the Mobility Issues / "Picture Me Rollin'" program card
+ - `about.jpg` — Image for the About page (team/values image)
 
 Steps to add images:
 1. Save each image with the exact filename above.
