@@ -10,11 +10,27 @@
         body { font-family: 'Open Sans', sans-serif; color: #333; padding: 40px; max-width: 1000px; margin: 0 auto; }
         h1 { font-family: 'Montserrat', sans-serif; color: #1a5276; }
         .hero { margin-top: 20px; }
-          .about-image { width: 100%; max-height: 400px; overflow: hidden; border-radius: 8px; }
-          /* The current about.jpg was uploaded upside-down. Rotate it 180deg visually
-              so the site shows the correct orientation. Replace the image file with
-              a corrected version later and remove this rule. */
-          .about-image img { width: 100%; height: auto; display: block; transform: rotate(180deg); }
+        .about-image {
+            width: 100%;
+            /* Use a fixed display height so we can control the crop area reliably */
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        /* The current about.jpg was uploaded upside-down. Rotate it 180deg visually
+           so the site shows the correct orientation. We use object-fit and
+           object-position to preserve faces (adjust object-position if needed).
+           Replace the image file with a corrected/cropped version later and
+           remove the transform if unnecessary. */
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; /* fills the container while preserving aspect ratio */
+            /* shift the focal point upward so faces near the top are visible; tweak as needed */
+            object-position: center 35%;
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
