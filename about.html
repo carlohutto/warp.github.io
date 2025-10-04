@@ -17,11 +17,9 @@
             overflow: hidden;
             border-radius: 8px;
         }
-        /* The current about.jpg was uploaded upside-down. Rotate it 180deg visually
-           so the site shows the correct orientation. We use object-fit and
-           object-position to preserve faces (adjust object-position if needed).
-           Replace the image file with a corrected/cropped version later and
-           remove the transform if unnecessary. */
+        /* The about.jpg has been replaced with a correctly oriented image.
+           We keep object-fit and object-position to preserve faces (adjust
+           object-position if needed). Remove this comment after final review. */
         .about-image img {
             width: 100%;
             height: 100%;
@@ -29,7 +27,6 @@
             object-fit: cover; /* fills the container while preserving aspect ratio */
             /* shift the focal point upward so faces near the top are visible; tweak as needed */
             object-position: center 35%;
-            transform: rotate(180deg);
         }
     </style>
 </head>
