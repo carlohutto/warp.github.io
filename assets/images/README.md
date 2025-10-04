@@ -1,4 +1,4 @@
- - `about.jpg` — Image for the About page (team/values image)
+ - `about-v2.jpg` — Image for the About page (team/values image). We renamed the file to avoid caching collisions; replace this file to update the About page.
 
 Steps to add images:
 1. Save each image with the exact filename above.
