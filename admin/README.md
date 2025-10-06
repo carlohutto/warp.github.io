@@ -12,3 +12,11 @@ Next steps to enable the admin UI:
 Notes:
 - The current Netlify CMS config uses the `git-gateway` backend and the `main` branch. You can switch to other backends if needed.
 - If you'd like, I can deploy this site to Netlify for you and perform the Identity + Git Gateway setup.
+
+Invite-only and editorial workflow tips:
+
+- To make registration invite-only, in Netlify Identity settings enable "Invite users" (you can invite team members by email).
+- To use the editorial workflow (drafts, in-review, publish), ensure `publish_mode: editorial_workflow` is set in `admin/config.yml` (done). Editors can create Drafts and open Pull Requests for review or use the editorial publish flow if allowed.
+- For previews, the `admin/preview-templates.js` file registers a simple post preview so editors see their content styled.
+
+If you'd like, I can deploy the site to Netlify and complete the Identity + Git Gateway setup, invite you as an admin, and test the editorial workflow end-to-end.
