@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ page.excerpt | default: site.description }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/assets/images/about.svg" type="image/svg+xml">
+    <style>
+      /* Minimal reset so posts inherit your site's styles */
+      body { font-family: 'Open Sans', sans-serif; color: #333; margin:0; }
+      header, footer { background: white; }
+      main { padding: 40px; max-width: 1000px; margin: 0 auto; }
+      h1 { font-family: 'Montserrat', sans-serif; color: #1a5276; }
+    </style>
+  </head>
+  <body>
+    <!-- Reuse simple header -->
+    <header>
+      <div class="container">
+        <a href="/">WARP NC</a>
+      </div>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; {{ site.time | date: "%Y" }} Working Against Recidivism & Poverty (WARP NC).</p>
+      </div>
+    </footer>
+  </body>
+</html>

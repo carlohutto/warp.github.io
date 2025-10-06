@@ -1,0 +1,6 @@
+title: WARP NC
+description: "Working Against Recidivism & Poverty in North Carolina"
+url: "https://ncwarp.org"
+baseurl: ""
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title.html
