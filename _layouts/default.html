@@ -11,18 +11,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="/assets/images/about.svg" type="image/svg+xml">
     <style>
-      /* Minimal reset so posts inherit your site's styles */
-      body { font-family: 'Open Sans', sans-serif; color: #333; margin:0; }
-      header, footer { background: white; }
-      main { padding: 40px; max-width: 1000px; margin: 0 auto; }
-      h1 { font-family: 'Montserrat', sans-serif; color: #1a5276; }
+      /* Inherit main site styles for consistent look */
+      :root{
+        --primary: #1a5276;
+        --accent: #e67e22;
+        --dark: #2c3e50;
+      }
+      body { font-family: 'Open Sans', sans-serif; color: #333; margin:0; line-height:1.6; }
+      .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+      header { background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: fixed; width:100%; top:0; z-index:1000; }
+      .header-container{ display:flex; justify-content:space-between; align-items:center; padding:15px 0; }
+      .logo h1{ font-family: 'Montserrat', sans-serif; margin:0; color:var(--primary); font-size:1.25rem }
+      nav ul{ display:flex; list-style:none; margin:0; padding:0 }
+      nav ul li{ margin-left:20px }
+      nav ul li a{ text-decoration:none; color:var(--dark); font-weight:600 }
+      main{ padding:120px 20px 60px; max-width:1100px; margin:0 auto }
+      footer{ background: var(--dark); color:#fff; padding:40px 0 }
+      footer a{ color:#ddd }
+      h1{ font-family: 'Montserrat', sans-serif; color:var(--primary) }
     </style>
   </head>
   <body>
-    <!-- Reuse simple header -->
     <header>
-      <div class="container">
-        <a href="/">WARP NC</a>
+      <div class="container header-container">
+        <div class="logo"><h1>WARP <span style="color:var(--accent)">NC</span></h1></div>
+        <nav>
+          <ul>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#mission">Mission</a></li>
+            <li><a href="/#programs">Programs</a></li>
+            <li><a href="/#contact" class="btn">Get Involved</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
@@ -32,7 +54,21 @@
 
     <footer>
       <div class="container">
-        <p>&copy; {{ site.time | date: "%Y" }} Working Against Recidivism & Poverty (WARP NC).</p>
+        <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap">
+          <div>
+            <h3>WARP NC</h3>
+            <p>Working Against Recidivism & Poverty through strategic partnerships across North Carolina.</p>
+          </div>
+          <div>
+            <h3>Quick Links</h3>
+            <p><a href="/">Home</a> • <a href="/blog/">Blog</a> • <a href="/about.html">About</a></p>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <p><a href="mailto:info@ncwarp.org">info@ncwarp.org</a></p>
+          </div>
+        </div>
+        <div style="text-align:center; padding-top:20px; color:#ccc">&copy; {{ site.time | date: "%Y" }} Working Against Recidivism & Poverty (WARP NC).</div>
       </div>
     </footer>
   </body>
