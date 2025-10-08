@@ -54,5 +54,17 @@ Forced to rebuild from nothing, they lived the catastrophic ripple effects that 
             <p>We invite you to join us. Form a strategic partnership, collaborate on our initiatives, or make a donation today. Your support isn’t just charity; it’s a direct investment in a proven, practical solution that builds a safer, stronger, and more prosperous community for all.</p>
         </section>
     </main>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+        <script>
+            if (window.netlifyIdentity) {
+                window.netlifyIdentity.on("init", user => {
+                    if (!user) {
+                        window.netlifyIdentity.on("login", () => {
+                            document.location.href = "/admin/";
+                        });
+                    }
+                });
+            }
+        </script>
 </body>
 </html>
