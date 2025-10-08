@@ -1,0 +1,118 @@
+:root {
+  --primary: #1a5276;
+  --secondary: #2e86c1;
+  --accent: #e67e22;
+  --light: #ecf0f1;
+  --dark: #2c3e50;
+  --success: #27ae60;
+  --text: #333333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Accessibility: skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 10px;
+  top: 10px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: #fff;
+  color: var(--dark);
+  z-index: 10000;
+  border-radius: 4px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.logo { display:flex; align-items:center }
+.logo h1{ font-size:1.5rem; margin:0; color:var(--primary) }
+.logo span{ color:var(--accent) }
+
+nav ul {
+  display:flex; list-style:none; margin:0; padding:0
+}
+nav ul li{ margin-left:25px }
+nav ul li a{ text-decoration:none; color:var(--dark); font-weight:600 }
+
+.btn { display:inline-block; background-color:var(--accent); color:white; padding:12px 25px; border-radius:4px; text-decoration:none; font-weight:600 }
+.btn:hover{ background-color:#d35400 }
+
+/* Admin button */
+#admin-login{ background:transparent; border:1px solid rgba(0,0,0,0.08); padding:8px 12px; border-radius:4px; font-weight:600 }
+
+/* Hero Section */
+.hero{ background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/assets/images/hero.jpg'); background-size:cover; background-position:center; height:80vh; display:flex; align-items:center; color:white; margin-top:80px }
+.hero-content{ max-width:700px }
+.hero h2{ font-size:3rem; color:white; margin-bottom:1.5rem }
+.hero p{ font-size:1.2rem; margin-bottom:1.2rem }
+.hero-quote{ font-size:1.1rem; font-style:italic; margin-bottom:1rem; color:#fff; }
+.hero-quote footer{ margin-top:6px; font-size:0.9rem; font-style:normal; color:rgba(255,255,255,0.85) }
+
+/* Mission, Programs, etc. keep previous rules (trimmed for brevity) */
+.mission{ padding:80px 0; background-color:var(--light); text-align:center }
+.mission-content{ display:flex; justify-content:space-between; gap:40px; margin-top:40px }
+.mission-image{ flex:1; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1) }
+.mission-image img{ width:100%; height:auto; display:block }
+
+.programs{ padding:80px 0 }
+.program-cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px }
+.program-card{ background:white; border-radius:8px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1) }
+.program-image{ height:200px; overflow:hidden }
+.program-image img{ width:100%; height:100%; object-fit:cover }
+.program-content{ padding:25px }
+
+/* Footer */
+footer{ background-color:var(--dark); color:white; padding:60px 0 30px }
+.footer-content{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:40px; margin-bottom:40px }
+.footer-column h3:after{ content:''; position:absolute }
+
+@media (max-width: 992px){ .mission-content{ flex-direction:column } .hero h2{ font-size:2.5rem } }
+@media (max-width:768px){ nav ul{ display:none } .hero{ height:60vh } .hero h2{ font-size:2rem } }
