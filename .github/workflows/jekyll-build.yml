@@ -35,6 +35,18 @@ jobs:
       - name: Build site with Jekyll
         run: bundle exec jekyll build --verbose
 
+      - name: Install html-proofer
+        run: gem install html-proofer
+
+      - name: Run link checker (html-proofer) on _site
+        run: |
+          # Only check internal links to avoid flaky external failures
+          htmlproofer ./_site \
+            --assume-extension \
+            --check-html \
+            --disable-external \
+            --url-ignore '/^mailto:/' '/^tel:/'
+
       - name: Upload _site as artifact (optional)
         if: always()
         uses: actions/upload-artifact@v4
