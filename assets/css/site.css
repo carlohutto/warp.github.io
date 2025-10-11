@@ -158,6 +158,12 @@ nav a:focus-visible{box-shadow:0 0 0 3px rgba(226,126,34,0.18);outline:none}
   transition: transform 0.3s;
 }
 
+/* Ensure program card text remains dark against the white card background
+   even when the site switches CSS variables for dark mode */
+.program-card, .program-card * {
+  color: var(--dark) !important;
+}
+
 .program-card:hover {
   transform: translateY(-10px);
 }
