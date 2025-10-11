@@ -1,0 +1,33 @@
+:root{
+  --primary:#1a5276;
+  --secondary:#2e86c1;
+  --accent:#e67e22;
+  --light:#ecf0f1;
+  --dark:#2c3e50;
+  --text:#333;
+}
+
+body{font-family:'Open Sans',sans-serif;color:var(--text);line-height:1.6}
+
+/* Hero styles (moved from index.html) */
+.hero{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('/assets/images/hero.jpg');background-size:cover;background-position:center;height:80vh;display:flex;align-items:center;color:#fff;margin-top:80px}
+.hero-content{max-width:700px}
+.hero h2{font-size:3rem;color:#fff;margin-bottom:1.5rem}
+.hero p{font-size:1.2rem;margin-bottom:2rem}
+.hero-quote{font-size:1.6rem;font-style:italic;color:#fff;margin:0 0 1.25rem 0;padding:0;background:transparent;border-left:4px solid rgba(255,255,255,0.15);padding-left:1rem;line-height:1.4}
+.hero-quote footer{margin-top:0.5rem;font-style:normal;font-size:0.9rem;color:rgba(255,255,255,0.85);background:transparent !important;padding:0 !important;margin:0.5rem 0 0 0 !important;display:inline-block}
+
+/* Mobile adjustments */
+@media (max-width: 768px){
+  .hero{height:60vh;margin-top:70px}
+  .hero h2{font-size:2.2rem}
+  .hero-quote{font-size:1.15rem;padding-left:0.6rem;border-left-width:3px}
+  .hero p{font-size:1rem}
+}
+
+@media (max-width: 480px){
+  .hero{height:55vh;margin-top:60px}
+  .hero h2{font-size:1.6rem}
+  .hero-quote{font-size:1rem;padding-left:0.5rem}
+  .hero p{font-size:0.95rem}
+}
