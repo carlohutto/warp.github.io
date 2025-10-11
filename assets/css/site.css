@@ -158,11 +158,24 @@ nav a:focus-visible{box-shadow:0 0 0 3px rgba(226,126,34,0.18);outline:none}
   transition: transform 0.3s;
 }
 
-/* Ensure program card text remains dark against the white card background
-   even when the site switches CSS variables for dark mode */
-.program-card, .program-card * {
-  color: var(--dark) !important;
+/* Dark-mode appearance for program cards: invert card background and
+   make text light for readability while refining shadows */
+html.dark .program-card {
+  background: #0b1220;
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
 }
+
+/* Ensure typical content inside the card inherits readable text color */
+html.dark .program-card .program-content,
+html.dark .program-card h3,
+html.dark .program-card p,
+html.dark .program-card li {
+  color: var(--text);
+}
+
+/* Slightly dim images to sit better on the darker card */
+html.dark .program-image img { filter: brightness(0.92); }
 
 .program-card:hover {
   transform: translateY(-10px);
