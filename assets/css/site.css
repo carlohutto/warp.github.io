@@ -177,6 +177,21 @@ html.dark .program-card li {
 /* Slightly dim images to sit better on the darker card */
 html.dark .program-image img { filter: brightness(0.92); }
 
+/* Dark-mode appearance for partner cards to match program cards */
+html.dark .partner-card {
+  background: #0b1220;
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+
+html.dark .partner-card h3,
+html.dark .partner-card p {
+  color: var(--text);
+}
+
+/* Slightly dim partner icons/images to sit better on dark background */
+html.dark .partner-icon { filter: brightness(0.95); color: var(--accent); }
+
 .program-card:hover {
   transform: translateY(-10px);
 }
