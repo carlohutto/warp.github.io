@@ -1,0 +1,10 @@
+title: WARP NC
+baseurl: ""
+url: ""
+theme: minima
+markdown: kramdown
+plugins: [jekyll-feed]
+
+collections:
+  posts:
+    output: true

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title }}{% if site.title %} | {{ site.title }}{% endif %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script>try{if(localStorage.getItem('warp-dark-mode')!=='false')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <div class="logo"><h1>WARP <span>NC</span></h1></div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="#contact" class="btn">Get Involved</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <button class="dark-toggle" aria-label="Toggle dark mode" onclick="window.warpDarkToggle && window.warpDarkToggle()">🌙</button>
+  <script src="/assets/js/dark-toggle.js" defer></script>
+</body>
+</html>

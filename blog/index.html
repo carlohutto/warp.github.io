@@ -1,0 +1,18 @@
+---
+layout: default
+title: Blog
+---
+
+<section class="section-header">
+  <h2>Blog</h2>
+  <p>Latest updates from WARP NC</p>
+</section>
+
+<ul class="post-list">
+  {% for post in site.posts %}
+  <li>
+    <a href="{{ post.url }}">{{ post.title }}</a>
+    <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
+  </li>
+  {% endfor %}
+</ul>
