@@ -180,10 +180,16 @@
         }
 
         .hero-quote footer {
+            /* Override global footer styles so the inline footer inside the blockquote
+               doesn't pick up the site-wide footer background/padding. */
             margin-top: 0.5rem;
             font-style: normal;
             font-size: 0.9rem;
             color: rgba(255,255,255,0.85);
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0.5rem 0 0 0 !important;
+            display: inline-block;
         }
         
         /* Mission Section */
