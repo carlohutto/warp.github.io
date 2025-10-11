@@ -439,3 +439,18 @@ footer{background-color:var(--dark);color:white;padding:60px 0 30px}
 @media (max-width:992px){.mission-content{flex-direction:column}.hero h2{font-size:2.5rem}}
 @media (max-width:768px){nav ul{display:none}.hero{height:60vh}.hero h2{font-size:2rem}.section-header h2{font-size:2rem}}
 
+/* Final override: ensure program cards invert correctly in dark mode even if base rules appear later */
+html.dark .program-card{
+  background: #0b1220 !important;
+  color: var(--text) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.7) !important;
+}
+html.dark .program-card .program-content,
+html.dark .program-card h3,
+html.dark .program-card p,
+html.dark .program-card li,
+html.dark .program-card a{
+  color: var(--text) !important;
+}
+html.dark .program-image img{filter:brightness(0.9) !important}
+
