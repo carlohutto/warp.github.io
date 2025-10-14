@@ -301,6 +301,13 @@ html.dark .partner-icon { filter: brightness(0.95); color: var(--accent); }
   color: var(--dark);
 }
 
+/* Improve contrast for stat labels in dark mode */
+html.dark .stat-text {
+  /* use the global readable text color in dark mode */
+  color: var(--text) !important;
+  font-weight: 700; /* slightly bolder for clarity */
+}
+
 /* CTA Section */
 .cta {
   padding: 80px 0;
