@@ -3,22 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Working Against Recidivism & Poverty - North Carolina</title>
-    <meta name="description" content="NC WARP (Working Against Recidivism & Poverty) Building Resilience and Reducing Harm in our community.">
+    <title>NC WARP - Working Against Recidivism & Poverty</title>
+    <meta name="description" content="NC WARP: Building Resilience and Reducing Harm in our community. Supporting justice-impacted individuals and families across North Carolina.">
     <meta name="theme-color" content="#1a5276">
-    <!-- Performance: preconnect to Google Fonts and preload hero image for faster LCP -->
+    
+    <!-- Fonts and Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="assets/images/hero.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- PayPal SDK - ONLY THIS LINE IN HEAD -->
+    
+    <!-- PayPal SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=ATB94xfAB9sS4o0hNhLJr53Emiaof4m6etgK5tpl04EpPE9jOLU-oOViYI5vu-1ialsTpgLNJDh-bUzD&currency=USD"></script>
-    <!-- Favicon (SVG) stored in assets/images/ -->
+    
+    <!-- Favicon -->
     <link rel="icon" href="assets/images/about.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/assets/css/site.css?v=20251014-2">
+    
+    <style>
+        /* Additional cleanup styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Fix any text overlap issues */
+        .hero-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .hero-quote {
+            margin-bottom: 30px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            max-width: 550px;
+            width: 90%;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #1a5276;
+        }
+        
+        .involvement-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0 20px;
+        }
+        
+        .involvement-btn {
+            padding: 18px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            text-align: left;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .involvement-btn:hover {
+            border-color: #1a5276;
+            background: #e8f4fc;
+            transform: translateX(5px);
+        }
+        
+        .involvement-btn h4 {
+            margin: 0 0 8px 0;
+            color: #1a5276;
+            font-size: 18px;
+        }
+        
+        .involvement-btn p {
+            margin: 0;
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+        
+        /* Donation section styling */
+        .donation-box {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+        }
+        
+        .amount-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .amount-preset {
+            padding: 12px 24px;
+            background: #1a5276;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .amount-preset:hover {
+            background: #0e3a5a;
+            transform: translateY(-2px);
+        }
+        
+        .custom-amount-input {
+            padding: 12px;
+            width: 220px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .tax-info {
+            font-size: 12px;
+            margin-top: 20px;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 25px;
+            }
+            .involvement-btn {
+                padding: 14px 16px;
+            }
+            .donation-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    
     <script>try{if(localStorage.getItem('warp-dark-mode')!=='false')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
-    <!-- rebui, ld-trigger: 2025-10-11T22:36:34Z -->
 </head>
 <body>
     <!-- Header -->
@@ -36,7 +203,7 @@
                     <li><a href="#programs">Programs</a></li>
                     <li><a href="#partners">Partners</a></li>
                     <li><a href="#impact">Impact</a></li>
-                    <li><a href="#contact" class="btn">Get Involved</a></li>
+                    <li><a href="#" id="getInvolvedNavBtn" class="btn">Get Involved</a></li>
                 </ul>
             </nav>
         </div>
@@ -46,21 +213,19 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <blockquote class="hero-quote">“North Carolina families deserve a true fair chance.
-NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofit serving justice-impacted individuals and their families across Gaston County and beyond. We combine lived experience with trauma-informed, research-based tools to break the cycles of reincarceration and poverty — for good.”
+                <blockquote class="hero-quote">
+                    "North Carolina families deserve a true fair chance. NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofit serving justice-impacted individuals and their families across Gaston County and beyond. We combine lived experience with trauma-informed, research-based tools to break the cycles of reincarceration and poverty — for good."
                     <footer>— <cite>Built by people with lived experience. Driven by resilience</cite></footer>
                 </blockquote>
   
-                <a href="#contact" class="btn" role="button">Join Our Mission</a>
+                <a href="#" id="joinMissionBtn" class="btn" role="button">Join Our Mission</a>
                 
-                <p>A Hub for Stability and Success</p>
-                <p>
-                    What began as a personal journey has evolved into a mission to strengthen families nationwide. We provide a bridge to the resources that matter most—from national advocacy to local grassroots support. Each month, we highlight a local organization doing the work on the ground here in Gastonia.
-
-                    Featured Local Resource: <a href="https://www.findhelp.org/mt.-zion-restoration-church--gastonia-nc--bountiful-blessings-food-pantry/4719691201380352?postal=28052" target="_blank">Bountiful Blessings Food Pantry</a>
-
-                    The Mission: Ensuring local families have access to quality, fresh food.
-                </p>   
+                <div style="margin-top: 40px;">
+                    <p><strong>A Hub for Stability and Success</strong></p>
+                    <p>What began as a personal journey has evolved into a mission to strengthen families nationwide. We provide a bridge to the resources that matter most—from national advocacy to local grassroots support. Each month, we highlight a local organization doing the work on the ground here in Gastonia.</p>
+                    <p><strong>Featured Local Resource:</strong> <a href="https://www.findhelp.org/mt.-zion-restoration-church--gastonia-nc--bountiful-blessings-food-pantry/4719691201380352?postal=28052" target="_blank">Bountiful Blessings Food Pantry</a></p>
+                    <p><strong>The Mission:</strong> Ensuring local families have access to quality, fresh food.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -217,37 +382,32 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
         </div>
     </section>
 
-    <!-- CTA Section with Donation Button -->
+    <!-- CTA Section with Donation -->
     <section class="cta" id="contact">
         <div class="container">
             <h2>Join Our Collaborative Network</h2>
             <p><strong>As a 501(c)(3) nonprofit (EIN: 39-4239364)</strong>, your partnership and support are tax-deductible.</p>
             <p>Whether you're an employer, service provider, community leader, or concerned citizen, there's a place for you in our partnership network.</p>
             
-            <!-- DONATION SECTION -->
-            <div style="margin: 40px 0; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+            <!-- Donation Section -->
+            <div class="donation-box">
                 <h3 style="margin-bottom: 20px;">Support Our Mission with a Donation</h3>
                 
-                <!-- Donation Amount Options -->
-                <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
-                    <button class="amount-preset" data-amount="10" style="padding: 10px 20px; background: #1a5276; color: white; border: none; border-radius: 6px; cursor: pointer;">$10</button>
-                    <button class="amount-preset" data-amount="25" style="padding: 10px 20px; background: #1a5276; color: white; border: none; border-radius: 6px; cursor: pointer;">$25</button>
-                    <button class="amount-preset" data-amount="50" style="padding: 10px 20px; background: #1a5276; color: white; border: none; border-radius: 6px; cursor: pointer;">$50</button>
-                    <button class="amount-preset" data-amount="100" style="padding: 10px 20px; background: #1a5276; color: white; border: none; border-radius: 6px; cursor: pointer;">$100</button>
-                    <button class="amount-preset" data-amount="250" style="padding: 10px 20px; background: #1a5276; color: white; border: none; border-radius: 6px; cursor: pointer;">$250</button>
+                <div class="amount-buttons">
+                    <button class="amount-preset" data-amount="10">$10</button>
+                    <button class="amount-preset" data-amount="25">$25</button>
+                    <button class="amount-preset" data-amount="50">$50</button>
+                    <button class="amount-preset" data-amount="100">$100</button>
+                    <button class="amount-preset" data-amount="250">$250</button>
                 </div>
                 
-                <!-- Custom Amount -->
-                <div style="margin-bottom: 25px;">
-                    <label for="custom-donation" style="display: block; margin-bottom: 8px;">Custom Amount ($):</label>
-                    <input type="number" id="custom-donation" min="1" step="1" placeholder="Enter any amount" style="padding: 10px; width: 200px; border-radius: 6px; border: 1px solid #ccc;">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <input type="number" id="custom-donation" min="1" step="1" placeholder="Enter custom amount" class="custom-amount-input">
                 </div>
                 
-                <!-- PayPal Button Container -->
                 <div id="paypal-button-container" style="max-width: 400px; margin: 0 auto;"></div>
                 
-                <!-- Tax Info -->
-                <p class="tax-info" style="font-size: 12px; margin-top: 20px;">
+                <p class="tax-info">
                     <small>
                         WORKING AGAINST RECIDIVISM AND POVERTY is a 501(c)(3) nonprofit organization. 
                         Your donation is tax-deductible to the extent allowed by law. 
@@ -256,7 +416,9 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
                 </p>
             </div>
             
-            <a href="mailto:info@ncwarp1.org" class="btn btn-light" role="button">Become a Partner</a>
+            <div style="margin-top: 20px; text-align: center;">
+                <a href="#" id="becomePartnerBtn" class="btn btn-light" role="button">Become a Partner</a>
+            </div>
         </div>
     </section>
 
@@ -291,8 +453,7 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
                     <a href="#programs">Programs</a>
                     <a href="#partners">Partners</a>
                     <a href="#impact">Impact</a>
-                    <a href="#contact">Get Involved</a>
-                    <a href="https://afspwalks.donordrive.com/participants/Nateara-Hutton" target="_blank" rel="noopener noreferrer">AFSP Walks — Donate</a>
+                    <a href="#" id="footerGetInvolvedBtn">Get Involved</a>
                 </div>
                 
                 <div class="footer-column">
@@ -311,19 +472,52 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
         </div>
     </footer>
     
+    <!-- MODAL POPUP -->
+    <div id="involvementModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="color: #1a5276; margin-bottom: 10px;">How Would You Like to Get Involved?</h2>
+            <p style="margin-bottom: 25px; color: #666;">Choose an option below to start making a difference with NC WARP.</p>
+            
+            <div class="involvement-options">
+                <div class="involvement-btn" onclick="document.getElementById('involvementModal').style.display='none'; document.getElementById('contact').scrollIntoView({behavior: 'smooth'});">
+                    <h4>💝 Make a Donation</h4>
+                    <p>Support our mission with a tax-deductible donation</p>
+                </div>
+                
+                <div class="involvement-btn" onclick="window.location.href='mailto:info@ncwarp1.org?subject=Partnership%20Inquiry%20-%20NC%20WARP'">
+                    <h4>🤝 Become a Partner</h4>
+                    <p>Join our network of business and community partners</p>
+                </div>
+                
+                <div class="involvement-btn" onclick="window.location.href='mailto:info@ncwarp1.org?subject=Volunteer%20Interest%20-%20NC%20WARP'">
+                    <h4>🙋 Volunteer Your Time</h4>
+                    <p>Share your skills and expertise with our community</p>
+                </div>
+                
+                <div class="involvement-btn" onclick="window.location.href='mailto:info@ncwarp1.org?subject=Newsletter%20Subscription'">
+                    <h4>📧 Subscribe to Newsletter</h4>
+                    <p>Stay updated on our programs and impact</p>
+                </div>
+            </div>
+            
+            <p style="font-size: 12px; color: #999; text-align: center; margin-top: 20px;">
+                Have other questions? <a href="mailto:info@ncwarp1.org" style="color: #1a5276;">Contact us directly</a>
+            </p>
+        </div>
+    </div>
+    
     <!-- PayPal Button JavaScript -->
     <script>
-        let donationAmount = '25.00'; // Default amount
+        let donationAmount = '25.00';
         
         // Handle preset amount clicks
         const presetButtons = document.querySelectorAll('.amount-preset');
         presetButtons.forEach(button => {
             button.addEventListener('click', function() {
                 donationAmount = this.getAttribute('data-amount') + '.00';
-                // Highlight selected button
                 presetButtons.forEach(btn => btn.style.backgroundColor = '#1a5276');
                 this.style.backgroundColor = '#0e3a5a';
-                // Clear custom amount input
                 const customInput = document.getElementById('custom-donation');
                 if (customInput) customInput.value = '';
             });
@@ -335,7 +529,6 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
             customInput.addEventListener('input', function() {
                 if (this.value && this.value > 0) {
                     donationAmount = this.value;
-                    // Reset preset button highlighting
                     presetButtons.forEach(btn => btn.style.backgroundColor = '#1a5276');
                 }
             });
@@ -351,13 +544,9 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
                     return actions.order.create({
                         purchase_units: [{
                             description: "Donation to WORKING AGAINST RECIDIVISM AND POVERTY",
-                            amount: {
-                                value: finalAmount.toFixed(2)
-                            }
+                            amount: { value: finalAmount.toFixed(2) }
                         }],
-                        application_context: {
-                            shipping_preference: "NO_SHIPPING"
-                        }
+                        application_context: { shipping_preference: "NO_SHIPPING" }
                     });
                 },
                 onApprove: function(data, actions) {
@@ -372,7 +561,7 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
                 },
                 onError: function(err) {
                     console.error('PayPal error:', err);
-                    alert('Sorry, there was an error processing your donation. Please try again or contact us for assistance.');
+                    alert('Sorry, there was an error processing your donation. Please try again.');
                 },
                 style: {
                     color: 'gold',
@@ -381,8 +570,51 @@ NC WARP — Working Against Recidivism & Poverty — is a community-led nonprofi
                     height: 45
                 }
             }).render('#paypal-button-container');
-        } else {
-            console.error('PayPal SDK not loaded');
+        }
+        
+        // MODAL FUNCTIONALITY
+        const modal = document.getElementById('involvementModal');
+        
+        function openModal() {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking X
+        document.querySelector('.close-modal').addEventListener('click', closeModal);
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) closeModal();
+        });
+        
+        // Attach to all Get Involved / Join Mission buttons
+        document.getElementById('getInvolvedNavBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+        
+        document.getElementById('joinMissionBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+        
+        document.getElementById('becomePartnerBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+        
+        const footerBtn = document.getElementById('footerGetInvolvedBtn');
+        if (footerBtn) {
+            footerBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal();
+            });
         }
     </script>
     
