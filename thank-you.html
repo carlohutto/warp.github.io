@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - NC WARP</title>
+    <meta name="description" content="Thank you for your donation to NC WARP - Working Against Recidivism & Poverty">
+    <meta name="theme-color" content="#1a5276">
+    <!-- Performance: preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/images/about.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/css/site.css?v=20251014-2">
+    <style>
+        /* Additional styles for thank-you page */
+        .thank-you-container {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .thank-you-icon {
+            font-size: 80px;
+            color: #1a5276;
+            margin-bottom: 20px;
+        }
+        
+        .thank-you-title {
+            font-size: 48px;
+            color: #1a5276;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .thank-you-message {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .transaction-id {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        
+        .impact-stats {
+            background: #e8f4fc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .impact-stats h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .impact-stats ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .impact-stats li {
+            padding: 8px 0;
+            border-bottom: 1px solid #cce4f0;
+        }
+        
+        .impact-stats li:last-child {
+            border-bottom: none;
+        }
+        
+        .impact-stats i {
+            color: #1a5276;
+            margin-right: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .social-share {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .social-share a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #1a5276;
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .social-share a:hover {
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .thank-you-container {
+                margin: 40px 20px;
+                padding: 30px 20px;
+            }
+            
+            .thank-you-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+    <script>try{if(localStorage.getItem('warp-dark-mode')!=='false')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>NC <span>WARP</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#mission">Mission</a></li>
+                    <li><a href="index.html#programs">Programs</a></li>
+                    <li><a href="index.html#contact" class="btn">Get Involved</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Thank You Content -->
+    <div class="container">
+        <div class="thank-you-container">
+            <div class="thank-you-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            
+            <h1 class="thank-you-title">Thank You!</h1>
+            
+            <div class="thank-you-message">
+                <p>Your generous donation to <strong>Working Against Recidivism & Poverty</strong> will help us continue our mission of building resilience and reducing harm in our community.</p>
+                <p>Because of supporters like you, we can provide critical resources to justice-impacted individuals and their families across North Carolina.</p>
+            </div>
+            
+            <!-- Transaction ID (displayed if available) -->
+            <div id="transaction-info" style="display: none;">
+                <div class="transaction-id">
+                    <strong>Transaction ID:</strong> <span id="txn-id"></span>
+                </div>
+            </div>
+            
+            <!-- Impact Stats -->
+            <div class="impact-stats">
+                <h3>Your Impact Matters</h3>
+                <ul>
+                    <li><i class="fas fa-chart-line"></i> Every $25 provides job readiness materials for one returning citizen</li>
+                    <li><i class="fas fa-home"></i> Every $100 helps secure stable housing resources for a family</li>
+                    <li><i class="fas fa-heartbeat"></i> Every $250 supports harm reduction outreach and education</li>
+                    <li><i class="fas fa-hand-holding-heart"></i> 100% of donations go directly to our programs and community support</li>
+                </ul>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="index.html" class="btn">Return to Homepage</a>
+                <a href="index.html#programs" class="btn-secondary">Learn About Our Programs</a>
+            </div>
+            
+            <!-- Social Share -->
+            <div class="social-share">
+                <p style="margin-bottom: 15px;">Share your support with others:</p>
+                <a href="#" id="share-facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" id="share-twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" id="share-linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" id="share-email"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <!-- Tax Receipt Note -->
+            <p style="font-size: 12px; color: #666; margin-top: 30px;">
+                <i class="fas fa-receipt"></i> A tax receipt has been sent to your email address.<br>
+                NC WARP is a 501(c)(3) nonprofit organization. EIN: 39-4239364
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NC WARP</h3>
+                    <p><strong>Federally Recognized 501(c)(3) Nonprofit</strong> (EIN: 39-4239364)<br>
+                    Donations are tax-deductible to the fullest extent allowed by law.</p>
+                    <p>Working Against Recidivism & Poverty through strategic partnerships and collaborative efforts across North Carolina.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/Carlos-Hutton-a25133253" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/warp.nc?igsh=MTJhMDd1bGt0OTR6dw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Serving Gaston County and surrounding areas.</p>
+                    <p><i class="fas fa-phone"></i> 980-281-2767</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@ncwarp1.org">info@ncwarp1.org</a></p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="index.html#home">Home</a>
+                    <a href="index.html#mission">Our Mission</a>
+                    <a href="index.html#programs">Programs</a>
+                    <a href="index.html#partners">Partners</a>
+                    <a href="index.html#impact">Impact</a>
+                    <a href="index.html#contact">Get Involved</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter to stay updated on our programs and partnership opportunities.</p>
+                    <form>
+                        <input type="email" placeholder="Your Email" style="padding:10px; width:100%; margin-bottom:10px; border-radius:4px; border:none;">
+                        <button type="submit" class="btn" style="width:100%">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Working Against Recidivism & Poverty (NC WARP). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <button class="dark-toggle" aria-label="Toggle dark mode" onclick="window.warpDarkToggle && window.warpDarkToggle()">🌙</button>
+    <script src="/assets/js/dark-toggle.js" defer></script>
+    
+    <script>
+        // Get transaction ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const txnId = urlParams.get('txn');
+        const amount = urlParams.get('amount');
+        
+        // Display transaction info if available
+        if (txnId) {
+            const transactionDiv = document.getElementById('transaction-info');
+            const txnSpan = document.getElementById('txn-id');
+            if (transactionDiv && txnSpan) {
+                txnSpan.textContent = txnId;
+                transactionDiv.style.display = 'block';
+            }
+        }
+        
+        // Set up social sharing links
+        const shareText = encodeURIComponent("I just donated to NC WARP to help fight recidivism and poverty in North Carolina! Join me in supporting this important cause.");
+        const shareUrl = encodeURIComponent("https://ncwarp.org");
+        
+        const facebookShare = document.getElementById('share-facebook');
+        const twitterShare = document.getElementById('share-twitter');
+        const linkedinShare = document.getElementById('share-linkedin');
+        const emailShare = document.getElementById('share-email');
+        
+        if (facebookShare) {
+            facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+        }
+        if (twitterShare) {
+            twitterShare.href = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
+        }
+        if (linkedinShare) {
+            linkedinShare.href = `https://www.linkedin.com/shareArticle?mini=true&url=${shareUrl}&title=Support NC WARP&summary=${shareText}`;
+        }
+        if (emailShare) {
+            emailShare.href = `mailto:?subject=Support NC WARP&body=${shareText} ${shareUrl}`;
+        }
+        
+        // Optional: Send thank you event to Google Analytics if you have it
+        if (typeof gtag !== 'undefined' && txnId) {
+            gtag('event', 'donation', {
+                'event_category': 'Donation',
+                'event_label': 'PayPal Donation',
+                'value': amount,
+                'transaction_id': txnId
+            });
+        }
+        
+        console.log('Thank you page loaded. Donation successful!');
+    </script>
+</body>
+</html>
