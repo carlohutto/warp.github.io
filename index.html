@@ -3,281 +3,828 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Working Against Recidivism & Poverty - North Carolina</title>
-    <meta name="description" content="WARP NC (Working Against Recidivism & Poverty) partners with communities and employers in North Carolina to support returning citizens with housing, job readiness, harm reduction, and transportation programs.">
-    <meta name="theme-color" content="#1a5276">
-    <!-- Performance: preconnect to Google Fonts and preload hero image for faster LCP -->
+    <title>NC WARP - Working Against Recidivism & Poverty</title>
+    <meta name="description" content="Breaking cycles of reincarceration and poverty. Building resilience, reducing harm.">
+    <meta name="theme-color" content="#0a2f44">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="image" href="assets/images/hero.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Favicon (SVG) stored in assets/images/ -->
+    
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=ATB94xfAB9sS4o0hNhLJr53Emiaof4m6etgK5tpl04EpPE9jOLU-oOViYI5vu-1ialsTpgLNJDh-bUzD&currency=USD"></script>
+    
     <link rel="icon" href="assets/images/about.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/assets/css/site.css?v=20251014-2">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fefefe;
+            color: #1a2a3a;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #0a2f44;
+        }
+        
+        .logo h1 span {
+            font-weight: 400;
+            color: #b87c4f;
+        }
+        
+        .logo-tagline {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #b87c4f;
+            margin-top: 4px;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e44;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        nav ul li a:hover {
+            color: #b87c4f;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #0a2f44;
+            color: white;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #b87c4f;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #0a2f44;
+            color: #0a2f44;
+        }
+        
+        .btn-outline:hover {
+            background: #0a2f44;
+            color: white;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            background: linear-gradient(135deg, #faf8f5 0%, #ffffff 100%);
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            line-height: 1.3;
+            font-weight: 500;
+            color: #0a2f44;
+            margin-bottom: 32px;
+        }
+        
+        .hero-quote footer {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #b87c4f;
+            margin-top: 24px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 40px 0 60px;
+        }
+        
+        /* Stats Banner */
+        .stats-banner {
+            background: #0a2f44;
+            color: white;
+            padding: 48px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #b87c4f;
+        }
+        
+        .stat-text {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: #0a2f44;
+            margin-bottom: 12px;
+        }
+        
+        .section-header p {
+            color: #6c7a7f;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Mission */
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .mission-text h3 {
+            font-size: 28px;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 20px;
+            color: #0a2f44;
+        }
+        
+        .mission-text p {
+            color: #4a5b66;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        
+        .mission-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        
+        /* Programs */
+        .program-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        
+        .program-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .program-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .program-content {
+            padding: 24px;
+        }
+        
+        .program-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #0a2f44;
+        }
+        
+        .program-content p {
+            font-size: 14px;
+            color: #6c7a7f;
+            line-height: 1.6;
+        }
+        
+        /* Partners */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        
+        .partner-card {
+            text-align: center;
+            padding: 32px 24px;
+            background: #faf8f5;
+            border-radius: 16px;
+        }
+        
+        .partner-icon i {
+            font-size: 40px;
+            color: #b87c4f;
+            margin-bottom: 20px;
+        }
+        
+        .partner-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .partner-card p {
+            font-size: 14px;
+            color: #6c7a7f;
+        }
+        
+        /* CTA / Donation */
+        .cta {
+            background: linear-gradient(135deg, #0a2f44 0%, #1a4a64 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .donation-box {
+            max-width: 500px;
+            margin: 40px auto 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 32px;
+        }
+        
+        .amount-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        
+        .amount-preset {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .amount-preset:hover,
+        .amount-preset.active {
+            background: #b87c4f;
+        }
+        
+        .custom-amount-input {
+            padding: 12px 16px;
+            width: 100%;
+            border-radius: 40px;
+            border: none;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0a1a24;
+            color: #9aaeb7;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column p, 
+        .footer-column a {
+            color: #9aaeb7;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .footer-column a:hover {
+            color: #b87c4f;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            font-size: 18px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .involvement-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 30px 0;
+        }
+        
+        .involvement-btn {
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .involvement-btn:hover {
+            background: #e8f0f5;
+            transform: translateX(5px);
+        }
+        
+        .involvement-btn h4 {
+            color: #0a2f44;
+            margin-bottom: 4px;
+        }
+        
+        .involvement-btn p {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        @media (max-width: 1024px) {
+            .program-cards,
+            .partners-grid,
+            .footer-content,
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .mission-content {
+                grid-template-columns: 1fr;
+            }
+            .hero-quote {
+                font-size: 32px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            nav ul {
+                gap: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .program-cards,
+            .partners-grid,
+            .footer-content,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            section {
+                padding: 50px 0;
+            }
+            .hero {
+                padding: 60px 0;
+            }
+            .hero-quote {
+                font-size: 28px;
+            }
+        }
+    </style>
+    
     <script>try{if(localStorage.getItem('warp-dark-mode')!=='false')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
-    <!-- rebui, ld-trigger: 2025-10-11T22:36:34Z -->
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
-                <h1>WARP <span>NC</span></h1>
+                <h1>NC <span>WARP</span></h1>
+                <div class="logo-tagline">WORKING AGAINST RECIDIVISM & POVERTY</div>
             </div>
             <nav>
                 <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#mission">Mission</a></li>
                     <li><a href="#programs">Programs</a></li>
-                    <li><a href="#partners">Partners</a></li>
                     <li><a href="#impact">Impact</a></li>
-                    <li><a href="#contact" class="btn">Get Involved</a></li>
+                    <li><a href="#" id="getInvolvedNavBtn" class="btn">Get Involved</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                                <blockquote class="hero-quote">“Through error you come to the truth! I am a man because I err! You never reach any truth without making fourteen mistakes and very likely a hundred and fourteen.”
-                                    <footer>— <cite>Fyodor Dostoyevsky</cite></footer>
-                                </blockquote>
-
-                                <p>When a brother, a mother, or a child is impacted by the justice system and poverty, the entire family serves the sentence. The struggle is collective.</p>
-
-                                <p>Our team is built by people with lived experience. We move from our own unlikely survival to creative action, channeling persistent resilience into the fight against recidivism. This isn’t just our work—it’s our lived story, for the sake of all families.</p>
-
-                                <a href="#contact" class="btn" role="button">Join Our Mission</a>
-            </div>
-    <!--    </div>
-    </section>
-
-     Donation CTA 
-    <section class="donate">
-        <div class="container">
-            <h2>Join Me in Supporting the American Foundation for Suicide Prevention</h2>
-            <p>I am joining hundreds of thousands of people across the country who are walking in the Out of the Darkness Community Walks to prevent suicide and support AFSP's mission to save lives and bring hope to those affected by suicide.</p>
-            <p>Please help me reach my goal by following this link. All donations are 100% tax deductible and benefit the American Foundation for Suicide Prevention (AFSP), funding research, education, advocacy, and support for those affected by suicide.</p>
-            <a href="https://afspwalks.donordrive.com/participants/Nateara-Hutton" class="btn-donate" target="_blank" rel="noopener noreferrer">Donate to AFSP Walks</a>
-        </div> 	-->									
-    </section>
-
-    <!-- Mission Section -->
-    <section class="mission" id="mission">
-        <div class="container">
-            <h2>Our Mission</h2>
-            <p>WARP partners with communities and businesses to create meaningful opportunities for returning citizens. We move beyond support to co-create solutions that ensure a true fair chance.</p>
-            
-            <div class="mission-content">
-                <div class="mission-text">
-                    <h3>Together We Can Make a Difference</h3>
-                    <p>At Working Against Recidivism & Poverty, we believe that sustainable change happens when communities, organizations, and government agencies work together. Our approach focuses on creating strategic partnerships that address both the immediate needs and systemic challenges faced by formerly incarcerated individuals.</p>
-                    <p>By collaborating with employers, educational institutions, housing providers, and mental health services, we create comprehensive support networks that empower individuals to build stable, productive lives after incarceration.</p>
-                    <a href="#partners" class="btn" role="button">Our Partners</a>
+                <div class="hero-quote">
+                    "North Carolina families deserve a true fair chance."
+                    <footer>— Community-led. Resilience-driven.</footer>
                 </div>
-                    <div class="mission-image">
-                    <img src="assets/images/mission.jpg" alt="Community collaboration" loading="lazy" decoding="async">
+                <div class="hero-buttons">
+                    <a href="#" id="joinMissionBtn" class="btn">Join Our Mission</a>
+                    <a href="#contact" class="btn btn-outline">Make a Donation</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Programs Section -->
-    <section class="programs" id="programs">
+    <div class="stats-banner">
         <div class="container">
-            <div class="section-header">
-                <h2>Our Programs</h2>
-                <p>Comprehensive support through collaborative initiatives</p>
-            </div>
-            
-            <div class="program-cards">
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/job-readiness.jpg" alt="Apprenticeship and job training" loading="lazy" decoding="async">
-                    </div>
-                    <div class="program-content">
-                        <h3>Job Readiness & Training</h3>
-                        <p>Partnerships with local employers and vocational training centers to provide skills development and employment opportunities for returning citizens.</p>
-                    </div>
-                </div>
-                
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/housing-assistance.jpg" alt="Family in front of a new home representing housing assistance" loading="lazy" decoding="async">
-                    </div>
-                    <div class="program-content">
-                        <h3>Housing Assistance</h3>
-                        <p>Collaborative program with housing authorities and landlords to secure stable housing for those reentering society.</p>
-                    </div>
-                </div>
-                
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/harm-reduction.jpg" alt="Harm reduction awareness" loading="lazy" decoding="async">
-                    </div>
-                    <div class="program-content">
-                        <h3>Harm Reduction Awareness</h3>
-                        <p>Providing education and outreach on harm reduction practices to improve health and safety in our communities.</p>
-                    </div>
-                </div>
-
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/picture-me-rollin.jpg" alt="Picture Me Rollin' mobility initiative" loading="lazy" decoding="async">
-                    </div>
-                    <div class="program-content">
-                        <h3>Addressing Mobility Issues</h3>
-                        <p>Showcasing our "Picture Me Rollin'" initiative, which documents and supports mobility access and independence for participants.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section class="partners" id="partners">
-        <div class="container">
-            <div class="section-header">
-                <h2>Strategic Partnerships</h2>
-                <p>Collaboration is at the heart of our approach</p>
-            </div>
-            
-            <div class="partners-grid">
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3>Business Partners</h3>
-                    <p>Local employers who provide job opportunities and workplace mentoring.</p>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Educational Institutions</h3>
-                    <p>Colleges and training centers offering specialized programs for returning citizens.</p>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </div>
-                    <h3>Community Organizations</h3>
-                    <p>Non-profits and community groups that provide resources and support services.</p>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-icon">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <h3>Government Agencies</h3>
-                    <p>State and local agencies working to reform systems and provide support.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Section -->
-    <section class="impact" id="impact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Critical Statistics</h2>
-                <p>Transportation, overdose risk, substance use, and suicide — facts that shape our work</p>
-            </div>
-            
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-number">63%</div>
                     <div class="stat-text">Employers Require Transportation</div>
-                    <p>Of employers in NC consider reliable transportation a "must-have" for employment, creating an immediate barrier to reentry.</p>
                 </div>
-
                 <div class="stat-item">
-                    <div class="stat-number">40% Higher</div>
-                    <div class="stat-text">Risk of Fatal Overdose</div>
-                    <p>Risk of fatal overdose is 40% higher in the first two weeks after release from incarceration, highlighting the critical need for immediate harm reduction support.</p>
+                    <div class="stat-number">40%</div>
+                    <div class="stat-text">Higher Overdose Risk Post-Release</div>
                 </div>
-
                 <div class="stat-item">
                     <div class="stat-number">70%</div>
-                    <div class="stat-text">Substance Use Disorder</div>
-                    <p>Of justice-involved individuals in NC report having a substance use disorder, yet fewer than 10% receive treatment while incarcerated.</p>
+                    <div class="stat-text">Face Substance Use Disorders</div>
                 </div>
-
                 <div class="stat-item">
-                    <div class="stat-number">5x Higher</div>
-                    <div class="stat-text">Suicide Rate</div>
-                    <p>The suicide rate is 5x higher among formerly incarcerated individuals compared to the general public, underscoring the profound mental health crisis we address.</p>
+                    <div class="stat-number">5x</div>
+                    <div class="stat-text">Higher Suicide Rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="mission" id="mission">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Mission</h2>
+                <p>Breaking cycles. Building futures.</p>
+            </div>
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h3>Together We Make a Difference</h3>
+                    <p>We advocate for justice-impacted individuals and families, combining lived experience with trauma-informed, research-based tools. Our goal: break the cycles of reincarceration and poverty — for good.</p>
+                    <p>Through collaboration with community partners, we create comprehensive support networks that empower the historically underserved to build stable, productive lives.</p>
+                    <a href="#partners" class="btn">Our Partners</a>
+                </div>
+                <div class="mission-image">
+                    <img src="assets/images/mission.jpg" alt="Community collaboration" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="contact">
+    <section class="programs" id="programs">
         <div class="container">
-            <h2>Join Our Collaborative Network</h2>
-            <p>Whether you're an employer, service provider, community leader, or concerned citizen, there's a place for you in our partnership network.</p>
-            <a href="mailto:info@ncwarp.org" class="btn btn-light" role="button">Become a Partner</a>
+            <div class="section-header">
+                <h2>What We Do</h2>
+                <p>Practical support. Real change.</p>
+            </div>
+            <div class="program-cards">
+                <div class="program-card">
+                    <div class="program-image">
+                        <img src="assets/images/job-readiness.jpg" alt="Job training" loading="lazy">
+                    </div>
+                    <div class="program-content">
+                        <h3>Skills for Success</h3>
+                        <p>AI training and professional development to help you thrive in today's market.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">
+                        <img src="assets/images/housing-assistance.jpg" alt="Housing" loading="lazy">
+                    </div>
+                    <div class="program-content">
+                        <h3>Stable Housing</h3>
+                        <p>Partnerships with housing authorities to secure safe, stable homes.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">
+                        <img src="assets/images/harm-reduction.jpg" alt="Harm reduction" loading="lazy">
+                    </div>
+                    <div class="program-content">
+                        <h3>Harm Reduction</h3>
+                        <p>Education and outreach to improve health and safety in our communities.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-image">
+                        <img src="assets/images/picture-me-rollin.jpg" alt="Resilience" loading="lazy">
+                    </div>
+                    <div class="program-content">
+                        <h3>Resilience Building</h3>
+                        <p>Trauma-informed strategies for lasting stability.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section class="partners" id="partners">
+        <div class="container">
+            <div class="section-header">
+                <h2>Strategic Partners</h2>
+                <p>Collaboration drives our impact.</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-icon"><i class="fas fa-building"></i></div>
+                    <h3>Business Partners</h3>
+                    <p>Fair Chance employers</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Educational Institutions</h3>
+                    <p>Training & opportunity</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3>Community Organizations</h3>
+                    <p>Local support networks</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-icon"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Government Agencies</h3>
+                    <p>Systemic reform partners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Support Our Work</h2>
+            <p>Your partnership makes change possible.</p>
+            
+            <div class="donation-box">
+                <h3 style="margin-bottom: 20px;">Make a Donation</h3>
+                <div class="amount-buttons">
+                    <button class="amount-preset" data-amount="10">$10</button>
+                    <button class="amount-preset" data-amount="25">$25</button>
+                    <button class="amount-preset" data-amount="50">$50</button>
+                    <button class="amount-preset" data-amount="100">$100</button>
+                    <button class="amount-preset" data-amount="250">$250</button>
+                </div>
+                <input type="number" id="custom-donation" placeholder="Custom amount" class="custom-amount-input">
+                <div id="paypal-button-container"></div>
+                <p style="font-size: 12px; margin-top: 20px; opacity: 0.8;">
+                    NC WARP is a 501(c)(3) nonprofit. EIN: 39-4239364
+                </p>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>WARP NC</h3>
-                    <p>Working Against Recidivism & Poverty through strategic partnerships and collaborative efforts across North Carolina.</p>
+                    <h3>NC WARP</h3>
+                    <p>Working Against Recidivism & Poverty through strategic partnerships across North Carolina.</p>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/Carlos-Hutton-a25133253" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.instagram.com/warp.nc?igsh=MTJhMDd1bGt0OTR6dw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/Carlos-Hutton-a25133253" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/warp.nc" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
-                
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p>Serving Gaston County and surrounding areas.</p>
-                    <p><i class="fas fa-phone"></i> 980-281-2767</p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@ncwarp.org">info@ncwarp.org</a></p>
+                    <h3>Contact</h3>
+                    <p>980-281-2767</p>
+                    <p><a href="mailto:info@ncwarp1.org">info@ncwarp1.org</a></p>
+                    <p>Serving Gaston County & beyond</p>
                 </div>
-                
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <a href="#home">Home</a>
-                    <a href="#mission">Our Mission</a>
+                    <a href="#mission">Mission</a>
                     <a href="#programs">Programs</a>
-                    <a href="#partners">Partners</a>
-                    <a href="#impact">Impact</a>
                     <a href="#contact">Get Involved</a>
-                    <a href="https://afspwalks.donordrive.com/participants/Nateara-Hutton" target="_blank" rel="noopener noreferrer">AFSP Walks — Donate</a>
                 </div>
-                
                 <div class="footer-column">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to our newsletter to stay updated on our programs and partnership opportunities.</p>
-                    <form>
-                        <input type="email" placeholder="Your Email" style="padding:10px; width:100%; margin-bottom:10px; border-radius:4px; border:none;">
-                        <button type="submit" class="btn" style="width:100%">Subscribe</button>
-                    </form>
+                    <h3>Legal</h3>
+                    <p>501(c)(3) Nonprofit</p>
+                    <p>EIN: 39-4239364</p>
+                    <p>Tax-deductible donations</p>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2025 Working Against Recidivism & Poverty (WARP NC). All rights reserved.</p>
+                <p>© 2026 NC WARP — Working Against Recidivism & Poverty. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Modal -->
+    <div id="involvementModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="color: #0a2f44;">Get Involved</h2>
+            <p style="margin-bottom: 20px;">Choose how you'd like to make a difference.</p>
+            <div class="involvement-options">
+                <div class="involvement-btn" onclick="document.getElementById('involvementModal').style.display='none'; document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+                    <h4>💝 Make a Donation</h4>
+                    <p>Support our mission</p>
+                </div>
+                <div class="involvement-btn" onclick="window.location.href='mailto:info@ncwarp1.org?subject=Partnership%20Inquiry'">
+                    <h4>🤝 Become a Partner</h4>
+                    <p>Join our network</p>
+                </div>
+                <div class="involvement-btn" onclick="window.location.href='mailto:info@ncwarp1.org?subject=Volunteer%20Interest'">
+                    <h4>🙋 Volunteer</h4>
+                    <p>Share your skills</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let donationAmount = '25.00';
+        
+        const presetButtons = document.querySelectorAll('.amount-preset');
+        presetButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                donationAmount = this.getAttribute('data-amount') + '.00';
+                presetButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('custom-donation').value = '';
+            });
+        });
+        
+        const customInput = document.getElementById('custom-donation');
+        if (customInput) {
+            customInput.addEventListener('input', function() {
+                if (this.value && this.value > 0) {
+                    donationAmount = this.value;
+                    presetButtons.forEach(btn => btn.classList.remove('active'));
+                }
+            });
+        }
+        
+        if (typeof paypal !== 'undefined') {
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    let finalAmount = parseFloat(donationAmount);
+                    if (isNaN(finalAmount) || finalAmount < 1) finalAmount = 25;
+                    return actions.order.create({
+                        purchase_units: [{
+                            description: "Donation to NC WARP",
+                            amount: { value: finalAmount.toFixed(2) }
+                        }],
+                        application_context: { shipping_preference: "NO_SHIPPING" }
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(orderData) {
+                        window.location.href = "/thank-you.html?txn=" + orderData.id;
+                    });
+                },
+                onError: function(err) {
+                    alert('Sorry, there was an error processing your donation.');
+                },
+                style: { color: 'gold', shape: 'rect', label: 'donate', height: 45 }
+            }).render('#paypal-button-container');
+        }
+        
+        const modal = document.getElementById('involvementModal');
+        function openModal() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeModal() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+        
+        document.querySelector('.close-modal').addEventListener('click', closeModal);
+        window.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+        
+        document.getElementById('getInvolvedNavBtn').addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+        document.getElementById('joinMissionBtn').addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+    </script>
+    
+    <button class="dark-toggle" aria-label="Toggle dark mode" onclick="window.warpDarkToggle && window.warpDarkToggle()">🌙</button>
+    <script src="/assets/js/dark-toggle.js" defer></script>
 </body>
 </html>
-<button class="dark-toggle" aria-label="Toggle dark mode" onclick="window.warpDarkToggle && window.warpDarkToggle()">🌙</button>
-<script src="/assets/js/dark-toggle.js" defer></script>
-<!-- force-rebuild: 2025-10-11T00:00:00Z -->
