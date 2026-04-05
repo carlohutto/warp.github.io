@@ -830,5 +830,84 @@
     
     <button class="dark-toggle" aria-label="Toggle dark mode" onclick="window.warpDarkToggle && window.warpDarkToggle()">🌙</button>
     <script src="/assets/js/dark-toggle.js" defer></script>
+<!-- TWO FLOATING BUTTONS - RAINN + Your April Campaign -->
+<style>
+    .floating-buttons {
+        position: fixed;
+        bottom: 30px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+    }
+
+    .support-btn {
+        padding: 12px 22px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .support-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .rainn-btn {
+        background-color: #7B2D8E;
+        color: white;
+    }
+
+    .rainn-btn:hover {
+        background-color: #5a1e6b;
+    }
+
+    .april-btn {
+        background-color: #b87c4f;
+        color: white;
+    }
+
+    .april-btn:hover {
+        background-color: #0a2f44;
+    }
+
+    @media (max-width: 768px) {
+        .support-btn {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+        .floating-buttons {
+            bottom: 20px;
+            right: 15px;
+            gap: 8px;
+        }
+    }
+</style>
+
+<div class="floating-buttons">
+    <a href="https://rainn.org" target="_blank" rel="noopener noreferrer" class="support-btn rainn-btn">
+        💜 RAINN: Get Help 24/7
+    </a>
+    <a href="#contact" class="support-btn april-btn" id="aprilSupportBtn">
+        🌸 Donate to NC WARP
+    </a>
+</div>
+
+<script>
+    // Make the April button scroll to donation section
+    document.getElementById('aprilSupportBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
 </body>
 </html>
