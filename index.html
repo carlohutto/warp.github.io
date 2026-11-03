@@ -3,828 +3,657 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NC WARP - Working Against Recidivism & Poverty</title>
-    <meta name="description" content="Breaking cycles of reincarceration and poverty. Building resilience, reducing harm.">
-    <meta name="theme-color" content="#0a2f44">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- PayPal SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=ATB94xfAB9sS4o0hNhLJr53Emiaof4m6etgK5tpl04EpPE9jOLU-oOViYI5vu-1ialsTpgLNJDh-bUzD&currency=USD"></script>
-    
-    <link rel="icon" href="assets/images/about.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/assets/css/site.css">
-    
+    <title>WARP | Working Against Recidivism & Poverty | Gaston County, NC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #fefefe;
-            color: #1a2a3a;
-            line-height: 1.5;
-        }
-        
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-        
-        /* Header */
-        header {
-            padding: 24px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .logo h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            color: #0a2f44;
-        }
-        
-        .logo h1 span {
-            font-weight: 400;
-            color: #b87c4f;
-        }
-        
-        .logo-tagline {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #b87c4f;
-            margin-top: 4px;
-        }
-        
-        nav ul {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-            align-items: center;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: #2c3e44;
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-        
-        nav ul li a:hover {
-            color: #b87c4f;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: #0a2f44;
-            color: white;
-            text-decoration: none;
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: #b87c4f;
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #0a2f44;
-            color: #0a2f44;
-        }
-        
-        .btn-outline:hover {
-            background: #0a2f44;
-            color: white;
-        }
-        
-        /* Hero */
-        .hero {
-            padding: 100px 0 80px;
-            background: linear-gradient(135deg, #faf8f5 0%, #ffffff 100%);
-        }
-        
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .hero-quote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            line-height: 1.3;
-            font-weight: 500;
-            color: #0a2f44;
-            margin-bottom: 32px;
-        }
-        
-        .hero-quote footer {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            color: #b87c4f;
-            margin-top: 24px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin: 40px 0 60px;
-        }
-        
-        /* Stats Banner */
-        .stats-banner {
-            background: #0a2f44;
-            color: white;
-            padding: 48px 0;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: #b87c4f;
-        }
-        
-        .stat-text {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 8px;
-        }
-        
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        
-        .section-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 36px;
-            font-weight: 600;
-            color: #0a2f44;
-            margin-bottom: 12px;
-        }
-        
-        .section-header p {
-            color: #6c7a7f;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Mission */
-        .mission-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .mission-text h3 {
-            font-size: 28px;
-            font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 20px;
-            color: #0a2f44;
-        }
-        
-        .mission-text p {
-            color: #4a5b66;
-            margin-bottom: 24px;
-            line-height: 1.7;
-        }
-        
-        .mission-image img {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-        
-        /* Programs */
-        .program-cards {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-        }
-        
-        .program-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        
-        .program-card:hover {
-            transform: translateY(-8px);
-        }
-        
-        .program-image img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .program-content {
-            padding: 24px;
-        }
-        
-        .program-content h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #0a2f44;
-        }
-        
-        .program-content p {
-            font-size: 14px;
-            color: #6c7a7f;
-            line-height: 1.6;
-        }
-        
-        /* Partners */
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-        }
-        
-        .partner-card {
-            text-align: center;
-            padding: 32px 24px;
-            background: #faf8f5;
-            border-radius: 16px;
-        }
-        
-        .partner-icon i {
-            font-size: 40px;
-            color: #b87c4f;
-            margin-bottom: 20px;
-        }
-        
-        .partner-card h3 {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        
-        .partner-card p {
-            font-size: 14px;
-            color: #6c7a7f;
-        }
-        
-        /* CTA / Donation */
-        .cta {
-            background: linear-gradient(135deg, #0a2f44 0%, #1a4a64 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .cta h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-        
-        .donation-box {
-            max-width: 500px;
-            margin: 40px auto 0;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 32px;
-        }
-        
-        .amount-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-        
-        .amount-preset {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            border-radius: 40px;
-            color: white;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .amount-preset:hover,
-        .amount-preset.active {
-            background: #b87c4f;
-        }
-        
-        .custom-amount-input {
-            padding: 12px 16px;
-            width: 100%;
-            border-radius: 40px;
-            border: none;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        
-        /* Footer */
-        footer {
-            background: #0a1a24;
-            color: #9aaeb7;
-            padding: 60px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-        
-        .footer-column h3 {
-            color: white;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-column p, 
-        .footer-column a {
-            color: #9aaeb7;
-            text-decoration: none;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-        
-        .footer-column a:hover {
-            color: #b87c4f;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 16px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            font-size: 18px;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 13px;
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 24px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #999;
-        }
-        
-        .involvement-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 30px 0;
-        }
-        
-        .involvement-btn {
-            padding: 16px 20px;
-            background: #f5f5f5;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: left;
-        }
-        
-        .involvement-btn:hover {
-            background: #e8f0f5;
-            transform: translateX(5px);
-        }
-        
-        .involvement-btn h4 {
-            color: #0a2f44;
-            margin-bottom: 4px;
-        }
-        
-        .involvement-btn p {
-            font-size: 13px;
-            color: #666;
-        }
-        
-        @media (max-width: 1024px) {
-            .program-cards,
-            .partners-grid,
-            .footer-content,
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .mission-content {
-                grid-template-columns: 1fr;
-            }
-            .hero-quote {
-                font-size: 32px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-            nav ul {
-                gap: 16px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .program-cards,
-            .partners-grid,
-            .footer-content,
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            section {
-                padding: 50px 0;
-            }
-            .hero {
-                padding: 60px 0;
-            }
-            .hero-quote {
-                font-size: 28px;
-            }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .serif-font { font-family: 'Cinzel', Georgia, serif; }
+        
+        .highlight-gap { 
+            background-color: #fef08a; 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: 600; 
+            border: 1px dashed #ca8a04; 
+            color: #854d0e;
+        }
+
+        /* Abstract Hero Geometric Pattern Overlay */
+        .pattern-overlay {
+            background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        /* Custom subtle hover animations */
+        .hover-lift {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.15);
         }
     </style>
-    
-    <script>try{if(localStorage.getItem('warp-dark-mode')!=='false')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
 </head>
-<body>
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <h1>NC <span>WARP</span></h1>
-                <div class="logo-tagline">WORKING AGAINST RECIDIVISM & POVERTY</div>
+<body class="bg-slate-900 text-slate-100 flex flex-col min-h-screen antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-amber-500 text-slate-950 text-xs font-bold py-2 px-4 text-center tracking-wide uppercase">
+        <span>Gaston County Grassroots Action &bull; Digital Equity & Re-Entry Support</span>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                
+                <!-- Logo & Branding -->
+                <a href="#" onclick="showPage('home')" class="flex items-center space-x-4 group">
+                    <img src="assets/images/warp-logo.png" alt="WARP Logo" class="h-14 w-auto object-contain group-hover:scale-105 transition" onerror="this.onerror=null; this.src='assets/images/warp-logo.png';">
+                    <div>
+                        <span class="block text-2xl font-extrabold text-white tracking-wider serif-font">WARP</span>
+                        <span class="text-[11px] text-amber-400 font-semibold tracking-widest uppercase block -mt-1">Working Against Recidivism & Poverty</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
+                    <button onclick="showPage('home')" class="nav-btn text-slate-300 hover:text-amber-400 transition py-2">Home</button>
+                    <button onclick="showPage('stay-close')" class="nav-btn text-slate-300 hover:text-amber-400 transition py-2">Stay Close Program</button>
+                    <button onclick="showPage('business-partners')" class="nav-btn text-slate-300 hover:text-amber-400 transition py-2">Business Partners</button>
+                    <button onclick="showPage('about')" class="nav-btn text-slate-300 hover:text-amber-400 transition py-2">About Us</button>
+                </nav>
+
+                <!-- Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="openModal('contact')" class="text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white px-4 py-2.5 rounded-lg border border-slate-700 hover:border-slate-500 transition">Contact</button>
+                    <button onclick="openModal('donate')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-lg shadow-md transition transform active:scale-95">Donate</button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#mission">Mission</a></li>
-                    <li><a href="#programs">Programs</a></li>
-                    <li><a href="#impact">Impact</a></li>
-                    <li><a href="#" id="getInvolvedNavBtn" class="btn">Get Involved</a></li>
-                </ul>
-            </nav>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-950 border-b border-slate-800 px-6 py-6 space-y-4">
+            <button onclick="showPage('home'); toggleMobileMenu();" class="block w-full text-left py-2 font-bold text-slate-200 hover:text-amber-400">Home</button>
+            <button onclick="showPage('stay-close'); toggleMobileMenu();" class="block w-full text-left py-2 font-bold text-slate-200 hover:text-amber-400">Stay Close Program</button>
+            <button onclick="showPage('business-partners'); toggleMobileMenu();" class="block w-full text-left py-2 font-bold text-slate-200 hover:text-amber-400">Business Partners</button>
+            <button onclick="showPage('about'); toggleMobileMenu();" class="block w-full text-left py-2 font-bold text-slate-200 hover:text-amber-400">About Us</button>
+            <div class="pt-4 border-t border-slate-800 flex flex-col space-y-3">
+                <button onclick="openModal('contact'); toggleMobileMenu();" class="w-full text-center py-3 text-xs uppercase font-bold text-slate-200 border border-slate-700 rounded-lg">Contact Us</button>
+                <button onclick="openModal('donate'); toggleMobileMenu();" class="w-full text-center py-3 text-xs uppercase font-extrabold bg-amber-500 text-slate-950 rounded-lg">Donate Now</button>
+            </div>
         </div>
     </header>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-quote">
-                    "North Carolina families deserve a true fair chance."
-                    <footer>— Community-led. Resilience-driven.</footer>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#" id="joinMissionBtn" class="btn">Join Our Mission</a>
-                    <a href="#contact" class="btn btn-outline">Make a Donation</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Main Content Container -->
+    <main class="flex-grow">
 
-    <div class="stats-banner">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">63%</div>
-                    <div class="stat-text">Employers Require Transportation</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">40%</div>
-                    <div class="stat-text">Higher Overdose Risk Post-Release</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">70%</div>
-                    <div class="stat-text">Face Substance Use Disorders</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5x</div>
-                    <div class="stat-text">Higher Suicide Rate</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="mission" id="mission">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Mission</h2>
-                <p>Breaking cycles. Building futures.</p>
-            </div>
-            <div class="mission-content">
-                <div class="mission-text">
-                    <h3>Together We Make a Difference</h3>
-                    <p>We advocate for justice-impacted individuals and families, combining lived experience with trauma-informed, research-based tools. Our goal: break the cycles of reincarceration and poverty — for good.</p>
-                    <p>Through collaboration with community partners, we create comprehensive support networks that empower the historically underserved to build stable, productive lives.</p>
-                    <a href="#partners" class="btn">Our Partners</a>
-                </div>
-                <div class="mission-image">
-                    <img src="assets/images/mission.jpg" alt="Community collaboration" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="programs" id="programs">
-        <div class="container">
-            <div class="section-header">
-                <h2>What We Do</h2>
-                <p>Practical support. Real change.</p>
-            </div>
-            <div class="program-cards">
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/job-readiness.jpg" alt="Job training" loading="lazy">
-                    </div>
-                    <div class="program-content">
-                        <h3>Skills for Success</h3>
-                        <p>AI training and professional development to help you thrive in today's market.</p>
-                    </div>
-                </div>
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/housing-assistance.jpg" alt="Housing" loading="lazy">
-                    </div>
-                    <div class="program-content">
-                        <h3>Stable Housing</h3>
-                        <p>Partnerships with housing authorities to secure safe, stable homes.</p>
-                    </div>
-                </div>
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/harm-reduction.jpg" alt="Harm reduction" loading="lazy">
-                    </div>
-                    <div class="program-content">
-                        <h3>Harm Reduction</h3>
-                        <p>Education and outreach to improve health and safety in our communities.</p>
-                    </div>
-                </div>
-                <div class="program-card">
-                    <div class="program-image">
-                        <img src="assets/images/picture-me-rollin.jpg" alt="Resilience" loading="lazy">
-                    </div>
-                    <div class="program-content">
-                        <h3>Resilience Building</h3>
-                        <p>Trauma-informed strategies for lasting stability.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="partners" id="partners">
-        <div class="container">
-            <div class="section-header">
-                <h2>Strategic Partners</h2>
-                <p>Collaboration drives our impact.</p>
-            </div>
-            <div class="partners-grid">
-                <div class="partner-card">
-                    <div class="partner-icon"><i class="fas fa-building"></i></div>
-                    <h3>Business Partners</h3>
-                    <p>Fair Chance employers</p>
-                </div>
-                <div class="partner-card">
-                    <div class="partner-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Educational Institutions</h3>
-                    <p>Training & opportunity</p>
-                </div>
-                <div class="partner-card">
-                    <div class="partner-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                    <h3>Community Organizations</h3>
-                    <p>Local support networks</p>
-                </div>
-                <div class="partner-card">
-                    <div class="partner-icon"><i class="fas fa-balance-scale"></i></div>
-                    <h3>Government Agencies</h3>
-                    <p>Systemic reform partners</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta" id="contact">
-        <div class="container">
-            <h2>Support Our Work</h2>
-            <p>Your partnership makes change possible.</p>
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="page-home" class="page-content">
             
-            <div class="donation-box">
-                <h3 style="margin-bottom: 20px;">Make a Donation</h3>
-                <div class="amount-buttons">
-                    <button class="amount-preset" data-amount="10">$10</button>
-                    <button class="amount-preset" data-amount="25">$25</button>
-                    <button class="amount-preset" data-amount="50">$50</button>
-                    <button class="amount-preset" data-amount="100">$100</button>
-                    <button class="amount-preset" data-amount="250">$250</button>
-                </div>
-                <input type="number" id="custom-donation" placeholder="Custom amount" class="custom-amount-input">
-                <div id="paypal-button-container"></div>
-                <p style="font-size: 12px; margin-top: 20px; opacity: 0.8;">
-                    NC WARP is a 501(c)(3) nonprofit. EIN: 39-4239364
-                </p>
-            </div>
-        </div>
-    </section>
+            <!-- Fortune-Style Hero Banner -->
+            <div class="relative bg-slate-950 text-white py-20 md:py-28 overflow-hidden border-b border-slate-800 pattern-overlay">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid md:grid-cols-12 gap-12 items-center">
+                        <div class="md:col-span-8">
+                            <div class="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-6">
+                                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                                <span>Gaston County Digital Equity</span>
+                            </div>
+                            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none mb-6 serif-font text-slate-100">
+                                Wherever you are, <span class="text-amber-400 italic font-serif">stay close.</span>
+                            </h1>
+                            <p class="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-2xl">
+                                Connecting Gaston County households and returning citizens with reliable internet access—so families stay in touch, find employment, and access essential services without barriers.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button onclick="showPage('stay-close')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider px-8 py-4 rounded-lg shadow-lg transition flex items-center justify-center space-x-3">
+                                    <span>Get Connected (Stay Close)</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="openModal('donate')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-lg border border-slate-700 transition">
+                                    Support Our Work
+                                </button>
+                            </div>
+                        </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>NC WARP</h3>
-                    <p>Working Against Recidivism & Poverty through strategic partnerships across North Carolina.</p>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/Carlos-Hutton-a25133253" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.instagram.com/warp.nc" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <!-- Side Statement Callout Box -->
+                        <div class="md:col-span-4 bg-slate-900/90 p-8 rounded-2xl border border-slate-800 shadow-2xl relative">
+                            <div class="text-amber-400 text-3xl font-serif mb-4">&ldquo;</div>
+                            <p class="text-slate-300 text-sm italic leading-relaxed mb-6">
+                                We saw an urgent need in Gaston County that wasn't being met, so we started where we could. We don't have big funding yet—your support is what turns an idea into a connection.
+                            </p>
+                            <div class="pt-4 border-t border-slate-800 flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 border border-amber-500/30 flex items-center justify-center font-bold text-amber-400 text-xs">WARP</div>
+                                <div>
+                                    <span class="block text-xs font-bold text-white uppercase tracking-wider">Grassroots Honesty</span>
+                                    <span class="block text-[11px] text-slate-500">Volunteer-Led Initiative</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Contact</h3>
-                    <p>980-281-2767</p>
-                    <p><a href="mailto:info@ncwarp1.org">info@ncwarp1.org</a></p>
-                    <p>Serving Gaston County & beyond</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <a href="#home">Home</a>
-                    <a href="#mission">Mission</a>
-                    <a href="#programs">Programs</a>
-                    <a href="#contact">Get Involved</a>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <p>501(c)(3) Nonprofit</p>
-                    <p>EIN: 39-4239364</p>
-                    <p>Tax-deductible donations</p>
+            </div>
+
+            <!-- Impact Banner / 3-Column Highlights -->
+            <div class="bg-slate-900 border-b border-slate-800 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        
+                        <div class="bg-slate-950 p-8 rounded-xl border border-slate-800 hover-lift">
+                            <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-lg flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-shield-heart"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 serif-font">Dignity-First Access</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Self-attestation is enough. No government ID required, no proof of release, and zero questions asked regarding past charges or background.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-950 p-8 rounded-xl border border-slate-800 hover-lift">
+                            <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-lg flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-wifi"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 serif-font">Mobile Connectivity</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Mobile 5G hotspots powered by proposed agreements on reliable network infrastructure, giving households stable access to work and family.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-950 p-8 rounded-xl border border-slate-800 hover-lift">
+                            <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-lg flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-hands-holding-circle"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 serif-font">Local Advocacy</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Grounded in Gaston County, NC. We collaborate with local small businesses, reentry partners, and community stakeholders to drive lasting change.
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div class="copyright">
-                <p>© 2026 NC WARP — Working Against Recidivism & Poverty. All rights reserved.</p>
+
+            <!-- Community Impact Photo Collage Section -->
+            <div class="py-20 bg-slate-950 border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-14">
+                        <span class="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-2">Gaston County Action</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white serif-font mb-4">Grassroots Leadership in Motion</h2>
+                        <p class="text-slate-400 text-sm sm:text-base">
+                            From food pantry deliveries and community garden cleanup to local partner meetings and hero award recognitions—we are actively building relationships on the ground.
+                        </p>
+                    </div>
+
+                    <!-- Responsive Asymmetric Grid Collage -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[220px]">
+                        
+                        <!-- Photo 1: Aunt Charlotte Community Garden (Large Hero Image) -->
+                        <div class="md:col-span-8 md:row-span-2 relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 hover-lift">
+                            <img src="assets/images/auntcharlotte.jpg" alt="Aunt Charlotte Community Garden Clean Up" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='assets/images/auntcharlotte.jpg';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-90 group-hover:opacity-95 transition"></div>
+                            <div class="absolute bottom-0 left-0 p-6 z-10">
+                                <span class="bg-amber-500 text-slate-950 font-extrabold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full mb-2 inline-block">Community Action</span>
+                                <h3 class="text-xl font-bold text-white serif-font">Aunt Charlotte Community Garden</h3>
+                                <p class="text-xs text-slate-300 mt-1">Gaston County partners coming together for neighborhood enhancement and youth engagement.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 2: Community Hero Award -->
+                        <div class="md:col-span-4 md:row-span-2 relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 hover-lift">
+                            <img src="assets/images/TW.jpg" alt="WellCare Community Hero Award" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='assets/images/TW.jpg';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 group-hover:opacity-95 transition"></div>
+                            <div class="absolute bottom-0 left-0 p-6 z-10">
+                                <span class="bg-blue-500 text-white font-extrabold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full mb-2 inline-block">Recognition</span>
+                                <h3 class="text-lg font-bold text-white serif-font">2025 Community Hero Award</h3>
+                                <p class="text-xs text-slate-300 mt-1">Celebrating community heroes and local re-entry partners dedicated to HELP Carolina and Gaston County.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 3: Food Pantry Direct Delivery -->
+                        <div class="md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 hover-lift">
+                            <img src="assets/images/foodpantry.jpg" alt="Food Pantry Delivery to Resident" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='assets/images/foodpantry.jpg';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-95 transition"></div>
+                            <div class="absolute bottom-0 left-0 p-5 z-10">
+                                <h3 class="text-base font-bold text-white serif-font">Direct Care & Food Deliveries</h3>
+                                <p class="text-[11px] text-slate-300">Volunteering directly to support residents with mobility needs and fresh groceries.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 4: St. Marks Meal Prep -->
+                        <div class="md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 hover-lift">
+                            <img src="assets/images/stmarks.jpg" alt="Meal Preparation at St Marks" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='assets/images/stmarks.jpg';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-95 transition"></div>
+                            <div class="absolute bottom-0 left-0 p-5 z-10">
+                                <h3 class="text-base font-bold text-white serif-font">Community Meal Prep</h3>
+                                <p class="text-[11px] text-slate-300">Preparing essential snack packs and meals for local outreach programs.</p>
+                            </div>
+                        </div>
+
+                        <!-- Photo 5: Gaston Outside GO Partnership Meeting -->
+                        <div class="md:col-span-4 md:row-span-1 relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 hover-lift">
+                            <img src="assets/images/gasgogo.jpg" alt="Gaston Outside GO Strategy Session" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='assets/images/gasgogo.jpg';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-95 transition"></div>
+                            <div class="absolute bottom-0 left-0 p-5 z-10">
+                                <h3 class="text-base font-bold text-white serif-font">Local Collaboration</h3>
+                                <p class="text-[11px] text-slate-300">Planning digital equity and re-entry initiatives with Gaston partners.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direct Fund Allocation Section (Dark Modern Style) -->
+            <div class="py-20 bg-slate-950">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <span class="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-2">Targeted Community Support</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white serif-font mb-4">Where Your Support Goes</h2>
+                        <p class="text-slate-400 text-sm sm:text-base">Direct your gift where it will make an immediate impact for returning citizens and families in Gaston County.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        
+                        <!-- Fund 1 -->
+                        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-8 flex flex-col justify-between hover-lift">
+                            <div>
+                                <span class="inline-block bg-amber-500/10 text-amber-400 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Program Fund</span>
+                                <h3 class="text-2xl font-bold text-white mb-3 serif-font">Stay Close Fund</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-8">
+                                    Directly purchases mobile hotspot devices and covers monthly cellular data subscriptions for connected households.
+                                </p>
+                            </div>
+                            <button onclick="openModal('donate', 'Digital Equity Fund')" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl transition">
+                                Donate to Stay Close
+                            </button>
+                        </div>
+
+                        <!-- Fund 2 -->
+                        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-8 flex flex-col justify-between hover-lift">
+                            <div>
+                                <span class="inline-block bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Core Operational</span>
+                                <h3 class="text-2xl font-bold text-white mb-3 serif-font">General Fund</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-8">
+                                    Keeps our volunteer-led organization operating smoothly, ensuring tax-exempt compliance, outreach, and administrative stability.
+                                </p>
+                            </div>
+                            <button onclick="openModal('donate', 'General Fund')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl border border-slate-700 transition">
+                                Donate to General Operations
+                            </button>
+                        </div>
+
+                        <!-- Fund 3 -->
+                        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-8 flex flex-col justify-between hover-lift">
+                            <div>
+                                <span class="inline-block bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Re-entry Support</span>
+                                <h3 class="text-2xl font-bold text-white mb-3 serif-font">Emergency Fund</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-8">
+                                    Provides rapid micro-grants for essential IDs, transportation vouchers, and urgent re-entry necessities.
+                                </p>
+                            </div>
+                            <button onclick="openModal('donate', 'Emergency Support Fund')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl border border-slate-700 transition">
+                                Donate to Re-entry
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 2: STAY CLOSE PROGRAM ================= -->
+        <section id="page-stay-close" class="page-content hidden py-16 bg-slate-950">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="mb-12">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-2">Digital Equity Policy & Application</span>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-white serif-font mb-4">Stay Close Hotspot Program</h1>
+                    <p class="text-slate-300 text-lg leading-relaxed font-light">
+                        Stay Close is WARP’s digital equity program. It connects Gaston County households that cannot afford internet access so families stay in touch, find employment, and reach vital services.
+                    </p>
+                </div>
+
+                <!-- Policy Summary Box -->
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl mb-10">
+                    <h2 class="text-2xl font-bold text-white serif-font mb-6 flex items-center">
+                        <i class="fa-solid fa-user-check text-amber-400 mr-3 text-xl"></i>
+                        Program Guidelines & Dignity-First Policy
+                    </h2>
+                    
+                    <div class="space-y-6 text-slate-300 text-sm leading-relaxed">
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800/80">
+                            <span class="font-bold text-white text-base block mb-1">1. Who Can Join the Interest List</span>
+                            <p class="text-slate-400">
+                                Gaston County residents who currently cannot afford reliable internet access. Priority is given to people recently released from incarceration and their families. <strong class="text-amber-400">Self-attestation is enough.</strong> No government ID, no proof of release, and no questions regarding background or past charges.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800/80">
+                            <span class="font-bold text-white text-base block mb-1">2. How It Works & What Participants Receive</span>
+                            <p class="text-slate-400">
+                                Joining the interest list does not guarantee immediate hardware. When funding arrives, we contact applicants in priority order. Participants receive a mobile hotspot powered by a proposed partner agreement with Mission Telecom on the T-Mobile network.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800/80">
+                            <span class="font-bold text-white text-base block mb-1">3. Device Guidelines & Respect</span>
+                            <p class="text-slate-400">
+                                Devices are provided for the active service period. Participants are encouraged (not required) to return the hardware if they no longer need it so another household can connect. Lost or damaged devices are replaced as funding allows, with no blame.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <button onclick="openModal('intake')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-lg transition">
+                            Apply / Join Stay Close Interest List
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Disclaimer Callout -->
+                <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 text-xs text-slate-400 leading-relaxed">
+                    <h3 class="font-bold text-amber-400 uppercase tracking-wider mb-2">Official Program Disclaimer</h3>
+                    <p>
+                        Stay Close is a grassroots program run by volunteers at WARP, a small nonprofit with no outside funding. Hotspots and service are provided only as community donations allow, so we cannot guarantee immediate availability, timing, or length of service. Joining the interest list does not guarantee a device. Service is provided through proposed agreements with Mission Telecom on the T-Mobile network and is subject to provider terms and coverage limits.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 3: BUSINESS PARTNERS ================= -->
+        <section id="page-business-partners" class="page-content hidden py-16 bg-slate-950">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="mb-12">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-2">Local Economic Support</span>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-white serif-font mb-4">Community-Driven Payments</h1>
+                    <p class="text-slate-300 text-lg leading-relaxed font-light">
+                        Supporting Gaston County small businesses, minority-owned enterprises, and returning citizen entrepreneurs through direct community partnership.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl mb-8">
+                    <h2 class="text-2xl font-bold text-white serif-font mb-4">Partnering for Inclusive Growth</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        WARP collaborates with local service providers, vendors, and businesses to construct meaningful reentry pathways. We prioritize engaging business partners who support fair-chance hiring practices and re-entry opportunities in Gaston County.
+                    </p>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Whether you provide technical equipment, cellular services, or job openings, we welcome business partnerships rooted in mutual respect and economic empowerment.
+                    </p>
+                </div>
+
+                <!-- Disclosure Box -->
+                <div class="bg-amber-500/10 p-6 rounded-xl border border-amber-500/30 text-xs text-amber-300 leading-relaxed mb-8">
+                    <h3 class="font-bold text-amber-400 uppercase tracking-wider mb-2">Partnership & Financial Disclosure</h3>
+                    <p>
+                        All vendor relationships and community-driven payment processing undergo strict board oversight. WARP maintains complete independence in program delivery, and listing as a business partner does not imply commercial endorsement.
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="openModal('contact')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-lg transition">
+                        Inquire About Business Partnerships
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 4: ABOUT US ================= -->
+        <section id="page-about" class="page-content hidden py-16 bg-slate-950">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="mb-12">
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-2">About WARP</span>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-white serif-font mb-4">Mission & Leadership</h1>
+                    <p class="text-slate-300 text-lg leading-relaxed font-light">
+                        Building practical, dignity-first bridges for returning citizens and under-resourced families in Gaston County.
+                    </p>
+                </div>
+
+                <!-- Mission Card -->
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl mb-12">
+                    <h2 class="text-2xl font-bold text-white serif-font mb-3">Our Mission</h2>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        WARP exists to eliminate systemic barriers for justice-involved individuals and households in Gaston County through digital connectivity, direct support navigation, and grassroots community advocacy.
+                    </p>
+                </div>
+
+                <!-- Team Bios -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-white serif-font mb-8">Board & Governance</h2>
+                    
+                    <div class="space-y-6">
+                        
+                        <!-- Carlos Hutton Bio Card -->
+                        <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl flex flex-col sm:flex-row gap-6 items-start">
+                            <img src="assets/images/carlos-hutton.jpg" alt="Carlos Hutton" class="w-24 h-24 rounded-2xl object-cover border-2 border-amber-500/40 shadow-lg flex-shrink-0" onerror="this.onerror=null; this.src='assets/images/carlos-hutton.jpg';">
+                            <div>
+                                <h3 class="text-xl font-bold text-white serif-font">Carlos Hutton</h3>
+                                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-3">President & Cofounder</span>
+                                <p class="text-slate-300 text-sm leading-relaxed">
+                                    Carlos cofounded Working Against Recidivism & Poverty (WARP) in 2025 to help people in Gaston County improve their reentry outcomes and keep families together. He leads WARP’s technology, handled the filing for the organization’s tax-exempt status, runs the board meetings, and volunteers in the community, including food pantry deliveries. Carlos is committed to amplifying voices that too often go unheard. Outside of WARP, he plays competitive Scrabble and enjoys bodyweight fitness, bringing the same discipline to both.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Nateara Bio Placeholder -->
+                        <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl flex flex-col sm:flex-row gap-6 items-start">
+                            <div class="w-20 h-20 bg-slate-800 rounded-2xl flex-shrink-0 flex items-center justify-center text-slate-400 text-2xl font-black font-serif">
+                                NH
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white serif-font">Nateara H.</h3>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-3">Board Member</span>
+                                <p class="text-slate-500 text-sm italic">
+                                    [ Bio pending update ]
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Rita Bio Placeholder -->
+                        <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl flex flex-col sm:flex-row gap-6 items-start">
+                            <div class="w-20 h-20 bg-slate-800 rounded-2xl flex-shrink-0 flex items-center justify-center text-slate-400 text-2xl font-black font-serif">
+                                RB
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white serif-font">Rita B.</h3>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-3">Board Member</span>
+                                <p class="text-slate-500 text-sm italic">
+                                    [ Bio pending update ]
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Transparency Box -->
+                <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 text-sm text-slate-400">
+                    <h3 class="font-bold text-white mb-2">Organizational Details & Compliance</h3>
+                    <p class="mb-1"><strong>Location:</strong> Gaston County, NC</p>
+                    <p><strong>EIN Status:</strong> <span class="highlight-gap">[ Pending / In Insertion ]</span></p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <span class="text-white font-bold text-xl block mb-2 serif-font">WARP</span>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Grassroots digital equity and re-entry support organization serving Gaston County, North Carolina.
+                    </p>
+                </div>
+                <div>
+                    <span class="text-white font-semibold block mb-2 uppercase text-xs tracking-wider">Contact Details</span>
+                    <p class="text-xs text-slate-400">Gaston County, NC</p>
+                    <p class="text-xs text-slate-400 mt-1">Phone: <span class="highlight-gap">[ Phone Number ]</span></p>
+                    <p class="text-xs text-slate-400 mt-1">Email: <span class="highlight-gap">[ Contact Email ]</span></p>
+                </div>
+                <div>
+                    <span class="text-white font-semibold block mb-2 uppercase text-xs tracking-wider">Quick Actions</span>
+                    <div class="space-y-1 text-xs">
+                        <button onclick="openModal('contact')" class="block hover:text-white transition">Contact Us</button>
+                        <button onclick="openModal('intake')" class="block hover:text-white transition">Hotspot Interest Form</button>
+                        <button onclick="openModal('donate')" class="block hover:text-amber-400 transition">Donate Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-6 border-t border-slate-900 text-xs text-center text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-2">
+                <span>&copy; 2026 WARP. All rights reserved.</span>
+                <span>EIN: <span class="highlight-gap">[ EIN Pending ]</span></span>
             </div>
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div id="involvementModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 style="color: #0a2f44;">Get Involved</h2>
-            <p style="margin-bottom: 20px;">Choose how you'd like to make a difference.</p>
-            <div class="involvement-options">
-                <div class="involvement-btn" onclick="document.getElementById('involvementModal').style.display='none'; document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
-                    <h4>💝 Make a Donation</h4>
-                    <p>Support our mission</p>
+    <!-- MODAL: DONATE -->
+    <div id="modal-donate" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-white">
+            <button onclick="closeModal('donate')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-2xl font-bold mb-1 serif-font">Support WARP</h3>
+            <p class="text-xs text-slate-400 mb-6">Choose your fund contribution below.</p>
+
+            <form onsubmit="handleFormSubmit(event, 'Donation')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Designated Fund</label>
+                    <select id="donate-fund-select" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        <option value="Digital Equity Fund">Digital Equity (Stay Close)</option>
+                        <option value="General Fund">General Operations</option>
+                        <option value="Emergency Support Fund">Returning Citizen Emergency Support</option>
+                    </select>
                 </div>
-                <div class="involvement-btn" onclick="window.location.href='mailto:info@ncwarp1.org?subject=Partnership%20Inquiry'">
-                    <h4>🤝 Become a Partner</h4>
-                    <p>Join our network</p>
+
+                <div class="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs text-amber-300">
+                    <i class="fa-solid fa-circle-info mr-1"></i> Payment processor setup: <span class="highlight-gap">[ Donate Link Pending ]</span>
                 </div>
-                <div class="involvement-btn" onclick="window.location.href='mailto:info@ncwarp1.org?subject=Volunteer%20Interest'">
-                    <h4>🙋 Volunteer</h4>
-                    <p>Share your skills</p>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Your Email Address</label>
+                    <input type="email" required placeholder="you@example.com" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none">
                 </div>
-            </div>
+
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl transition">
+                    Submit Donation Inquiry
+                </button>
+            </form>
         </div>
     </div>
 
+    <!-- MODAL: CONTACT -->
+    <div id="modal-contact" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-white">
+            <button onclick="closeModal('contact')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-2xl font-bold mb-1 serif-font">Contact Us</h3>
+            <p class="text-xs text-slate-400 mb-6">Send a direct message to the WARP team.</p>
+
+            <form onsubmit="handleFormSubmit(event, 'Contact')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name</label>
+                    <input type="text" required placeholder="Your name" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Email or Phone</label>
+                    <input type="text" required placeholder="Best way to reach you" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Message</label>
+                    <textarea rows="3" required placeholder="How can we assist or partner with you?" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl transition">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: STAY CLOSE INTAKE -->
+    <div id="modal-intake" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative text-white max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('intake')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-2xl font-bold mb-1 serif-font">Stay Close Interest Form</h3>
+            <p class="text-xs text-slate-400 mb-6">Zero-barrier application for Gaston County residents.</p>
+
+            <form onsubmit="handleFormSubmit(event, 'Hotspot Application')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name</label>
+                    <input type="text" required placeholder="First and last name" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Contact Phone or Email</label>
+                    <input type="text" required placeholder="Phone number or email" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">ZIP Code (Gaston County)</label>
+                    <input type="text" required placeholder="e.g. 28052" class="w-full text-sm bg-slate-950 border border-slate-800 text-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+                
+                <div class="p-4 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-400">
+                    <p class="font-bold text-amber-400 mb-1">Self-Attestation Statement</p>
+                    <p>By submitting this form, I confirm that my household currently lacks reliable internet access in Gaston County.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl transition">
+                    Submit Application
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Page Switcher Script -->
     <script>
-        let donationAmount = '25.00';
-        
-        const presetButtons = document.querySelectorAll('.amount-preset');
-        presetButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                donationAmount = this.getAttribute('data-amount') + '.00';
-                presetButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                document.getElementById('custom-donation').value = '';
-            });
-        });
-        
-        const customInput = document.getElementById('custom-donation');
-        if (customInput) {
-            customInput.addEventListener('input', function() {
-                if (this.value && this.value > 0) {
-                    donationAmount = this.value;
-                    presetButtons.forEach(btn => btn.classList.remove('active'));
-                }
-            });
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
-        
-        if (typeof paypal !== 'undefined') {
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    let finalAmount = parseFloat(donationAmount);
-                    if (isNaN(finalAmount) || finalAmount < 1) finalAmount = 25;
-                    return actions.order.create({
-                        purchase_units: [{
-                            description: "Donation to NC WARP",
-                            amount: { value: finalAmount.toFixed(2) }
-                        }],
-                        application_context: { shipping_preference: "NO_SHIPPING" }
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(orderData) {
-                        window.location.href = "/thank-you.html?txn=" + orderData.id;
-                    });
-                },
-                onError: function(err) {
-                    alert('Sorry, there was an error processing your donation.');
-                },
-                style: { color: 'gold', shape: 'rect', label: 'donate', height: 45 }
-            }).render('#paypal-button-container');
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         }
-        
-        const modal = document.getElementById('involvementModal');
-        function openModal() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeModal() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
-        
-        document.querySelector('.close-modal').addEventListener('click', closeModal);
-        window.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
-        
-        document.getElementById('getInvolvedNavBtn').addEventListener('click', function(e) { e.preventDefault(); openModal(); });
-        document.getElementById('joinMissionBtn').addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+
+        function openModal(modalId, fundName = null) {
+            if (fundName && modalId === 'donate') {
+                const select = document.getElementById('donate-fund-select');
+                if (select) select.value = fundName;
+            }
+            const modal = document.getElementById('modal-' + modalId);
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById('modal-' + modalId);
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function handleFormSubmit(event, formType) {
+            event.preventDefault();
+            alert(formType + ' submitted successfully! We will get back to you shortly.');
+            event.target.reset();
+            document.querySelectorAll('[id^="modal-"]').forEach(modal => modal.classList.add('hidden'));
+        }
     </script>
-    
-    <button class="dark-toggle" aria-label="Toggle dark mode" onclick="window.warpDarkToggle && window.warpDarkToggle()">🌙</button>
-    <script src="/assets/js/dark-toggle.js" defer></script>
 </body>
 </html>
