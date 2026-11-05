@@ -72,25 +72,41 @@
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="bg-amber-500/10 border border-amber-500/30 p-2 rounded-lg text-amber-400">
-                    <i class="fa-solid fa-scale-unbalanced-flip text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-lg text-white tracking-tight flex items-center gap-2">
-                        <span>MARGINAL</span>
-                        <span class="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/30 uppercase font-semibold">Simulator</span>
-                    </h1>
-                    <p class="text-xs text-slate-400 hidden sm:block">A Realistic Reentry & Poverty Awareness Experience</p>
+                <!-- Return to Main Site Button -->
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 font-semibold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1.5 shrink-0" title="Return to WARP Main Website">
+                    <i class="fa-solid fa-house text-amber-400"></i>
+                    <span class="hidden sm:inline">Main Site</span>
+                </a>
+                <div class="h-5 w-px bg-slate-800"></div>
+                <div class="flex items-center gap-2">
+                    <div class="bg-amber-500/10 border border-amber-500/30 p-2 rounded-lg text-amber-400">
+                        <i class="fa-solid fa-scale-unbalanced-flip text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg text-white tracking-tight flex items-center gap-2">
+                            <span>MARGINAL</span>
+                            <span class="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/30 uppercase font-semibold">Simulator</span>
+                        </h1>
+                        <p class="text-xs text-slate-400 hidden lg:block">A Realistic Reentry & Poverty Awareness Experience</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
+            <!-- Quick Navigation Menu to Main Pages -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <nav class="hidden md:flex items-center gap-1 text-xs">
+                    <a href="index.html#stay-close" class="text-slate-400 hover:text-amber-400 transition px-2.5 py-1.5 rounded-md hover:bg-slate-800">Stay Close</a>
+                    <a href="index.html#business-partners" class="text-slate-400 hover:text-amber-400 transition px-2.5 py-1.5 rounded-md hover:bg-slate-800">Partners</a>
+                    <a href="index.html#about" class="text-slate-400 hover:text-amber-400 transition px-2.5 py-1.5 rounded-md hover:bg-slate-800">About Us</a>
+                </nav>
+
                 <button id="resetAppBtn" onclick="game.resetToStart()" class="text-xs text-slate-400 hover:text-amber-400 transition flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-900">
                     <i class="fa-solid fa-rotate-left"></i>
-                    <span>Restart</span>
+                    <span class="hidden sm:inline">Restart</span>
                 </button>
-                <a href="#debrief" id="warpLinkBtn" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg transition shadow-md">
-                    WARP Initiatives
+                <a href="index.html#donate" id="warpLinkBtn" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg transition shadow-md flex items-center gap-1">
+                    <span>Donate</span>
+                    <i class="fa-solid fa-heart text-[10px]"></i>
                 </a>
             </div>
         </div>
@@ -339,7 +355,11 @@
                             <button onclick="game.resetToStart()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold px-5 py-3 rounded-xl transition text-xs text-center">
                                 Try Another Persona
                             </button>
-                            <a href="#donate" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition shadow-lg text-xs text-center flex items-center justify-center gap-2">
+                            <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 font-bold px-5 py-3 rounded-xl transition text-xs text-center flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Back to Main Site</span>
+                            </a>
+                            <a href="index.html#donate" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition shadow-lg text-xs text-center flex items-center justify-center gap-2">
                                 <span>Support WARP's Mission</span>
                                 <i class="fa-solid fa-heart text-xs"></i>
                             </a>
@@ -355,6 +375,13 @@
     <!-- FOOTER -->
     <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-400">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="index.html" class="hover:text-amber-400 transition font-semibold">Home</a>
+                <span>•</span>
+                <a href="index.html#stay-close" class="hover:text-amber-400 transition">Stay Close Program</a>
+                <span>•</span>
+                <a href="index.html#about" class="hover:text-amber-400 transition">About Us</a>
+            </div>
             <p>&copy; 2026 Working Against Recidivism & Poverty (WARP). All rights reserved.</p>
             <div class="flex items-center gap-4 text-slate-400">
                 <a href="https://app.candid.org/profile/16517092/working-against-recidivism-and-poverty-39-4239364/?pkId=13c99a05-b8ad-48ed-81f8-bbe890006516" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1">
