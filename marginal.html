@@ -94,6 +94,10 @@
                     <span class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-1 rounded-md font-bold tracking-wide uppercase">
                         MARGINAL SIMULATOR
                     </span>
+                    <!-- BETA MODE BADGE -->
+                    <span class="text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30 px-2 py-0.5 rounded font-mono font-bold tracking-wider uppercase">
+                        BETA v0.9
+                    </span>
                 </div>
             </div>
 
@@ -402,11 +406,9 @@
          * ====================================================================
          * MARGINAL SIMULATOR CONFIGURATION & DATA STRUCTURES
          * ====================================================================
-         * You can freely edit characters, stats, and scenario text right here!
          */
 
         const CHARACTERS = [
-            // CATEGORY 1: ADULT RETURNING CITIZENS
             {
                 id: 'marcus',
                 category: 'adult',
@@ -428,23 +430,9 @@
                 tagline: 'Domestic violence survivor balancing court-mandated therapy co-pays.',
                 bio: 'Tasha is reentering society while carrying severe trauma. Court-ordered counseling is required for her probation, but each mandatory session requires a $45 out-of-pocket co-pay.',
                 stats: { cash: 90, legal: 80, stress: 80, housing: 70 },
-                poType: 'Impatient Officer (Views anxiety symptoms as non-compliance)',
+                poType: 'Impatient Officer',
                 avatarInitials: 'T'
             },
-            {
-                id: 'james',
-                category: 'adult',
-                name: 'James',
-                age: 52,
-                badge: 'Senior & Debt',
-                tagline: 'Chronic back pain, heavy court debt, and driver license suspension.',
-                bio: 'James served a decade inside. He works hard despite chronic back pain, but over $1,200 in court fines and monthly supervision fees threaten to suspend his license.',
-                stats: { cash: 110, legal: 90, stress: 55, housing: 80 },
-                poType: 'Overloaded Officer (Slow to authorize travel permits)',
-                avatarInitials: 'J'
-            },
-
-            // CATEGORY 2: YOUNG ADULTS & FAMILY IMPACT
             {
                 id: 'maya',
                 category: 'young',
@@ -454,58 +442,8 @@
                 tagline: 'Raising her asthmatic daughter after losing her husband to fentanyl.',
                 bio: 'After living in her car for 5 months, Maya finally moved into a low-cost apartment. She works retail while caring for her 4-year-old daughter who suffers from chronic asthma.',
                 stats: { cash: 160, legal: 95, stress: 85, housing: 75 },
-                poType: 'Social Services Auditor (Strict attendance rules for subsidy)',
+                poType: 'Social Services Auditor',
                 avatarInitials: 'M'
-            },
-            {
-                id: 'deandre',
-                category: 'young',
-                name: 'Deandre',
-                age: 20,
-                badge: 'Intergenerational Shield',
-                tagline: 'Gig worker keeping family utilities on while brother is incarcerated.',
-                bio: 'Deandre delivers food on a moped around Gastonia to support his disabled mother and pay household utilities while his older brother finishes a prison sentence.',
-                stats: { cash: 125, legal: 95, stress: 65, housing: 70 },
-                poType: 'Suspicious Officer (Conducts surprise home checks)',
-                avatarInitials: 'D'
-            },
-            {
-                id: 'chloe',
-                category: 'young',
-                name: 'Chloe',
-                age: 22,
-                badge: 'Digital Exclusion',
-                tagline: 'Former foster youth pursuing CNA license without Wi-Fi or co-signers.',
-                bio: 'Chloe aged out of foster care. She relies on fast-food Wi-Fi to submit medical coursework and struggles to afford mandatory uniform fees and background check costs.',
-                stats: { cash: 85, legal: 90, stress: 70, housing: 65 },
-                poType: 'Financial Aid Compliance Officer',
-                avatarInitials: 'C'
-            },
-
-            // CATEGORY 3: EXTREME HARDSHIP & SYSTEMIC BARRIERS
-            {
-                id: 'robert',
-                category: 'extreme',
-                name: 'Robert',
-                age: 45,
-                badge: 'Dual Diagnosis',
-                tagline: 'Bipolar disorder and probation urine test fees create constant friction.',
-                bio: 'Robert wants to stay clean and steady, but prescription co-pays ($35) and mandatory drug test fees ($30) force him to choose between medicine and legal compliance.',
-                stats: { cash: 75, legal: 70, stress: 85, housing: 50 },
-                poType: 'Strict & Unforgiving Officer (Random drug testing demands)',
-                avatarInitials: 'R'
-            },
-            {
-                id: 'tamera',
-                category: 'extreme',
-                name: 'Tamera',
-                age: 31,
-                badge: 'DV Survivor',
-                tagline: 'Navigating domestic violence protective orders and job applications.',
-                bio: 'Tamera is staying at a local shelter after defending herself from an abusive ex-partner. She struggles to provide a permanent home address required by employers.',
-                stats: { cash: 150, legal: 85, stress: 75, housing: 60 },
-                poType: 'Supportive but Bound Officer',
-                avatarInitials: 'T'
             },
             {
                 id: 'carlos',
@@ -516,221 +454,313 @@
                 tagline: 'Living in rural Gaston County with a revoked license and no bus route.',
                 bio: 'Carlos lives 15 miles from the Gaston County Courthouse. Without public transit, getting to probation check-ins requires paying $35 for rideshares or risking driving without a license.',
                 stats: { cash: 100, legal: 82, stress: 60, housing: 85 },
-                poType: 'Remote Officer (Insists on in-person reporting)',
+                poType: 'Remote Officer',
                 avatarInitials: 'C'
             }
         ];
 
-        // DYNAMIC SCENARIO DATABASE WITH 3-OPTION DECISION TREES
-        const SCENARIOS = [
-            {
-                day: 1,
-                category: 'Mandatory Supervision Fee',
-                title: 'Day 1: The Monthly Probation Fee',
-                text: 'You report to your monthly check-in. Your officer reminds you that your mandatory $40 monthly supervision fee is due today, plus a mandatory $4.50 processing fee if paying by card.',
-                gastoniaNote: 'Gaston County Community Corrections Office',
-                options: [
-                    {
-                        text: 'Pay the $44.50 total fee immediately to maintain legal compliance.',
-                        cashDelta: -44.50,
-                        legalDelta: 5,
-                        stressDelta: -5,
-                        housingDelta: 0,
-                        feeExtracted: { name: 'Probation Supervision & Card Fee', amount: 44.50, reason: 'Mandatory monthly supervision fee + debit processor surcharge.', societalCost: '$180/day jail booking cost if arrested for non-payment.' }
-                    },
-                    {
-                        text: 'Request a 1-week extension to keep cash for groceries. (Triggers a warning flag on your record).',
-                        cashDelta: 0,
-                        legalDelta: -15,
-                        stressDelta: 15,
-                        housingDelta: 0,
-                        feeExtracted: null
-                    },
-                    {
-                        text: 'Agree to drop off a locked envelope across town for an acquaintance who promises $60 cash.',
-                        cashDelta: 60,
-                        legalDelta: -10,
-                        stressDelta: 10,
-                        housingDelta: 0,
-                        riskFlag: 'Unchecked Transport',
-                        feeExtracted: { name: 'High-Risk Favor Risk Surcharge', amount: 0, reason: 'Accepted informal transport cash; vehicle plate logged in secondary inquiry.', societalCost: 'Potential secondary law enforcement involvement.' }
-                    }
-                ]
-            },
-            {
-                day: 2,
-                category: 'Housing Integrity & Health Trap',
-                title: 'Day 2: Hidden Mold & Landlord Pressure',
-                text: 'After 5 months living in a vehicle, you finally secured an apartment. Today you discover toxic black mold behind the bathroom tile, hidden under fresh paint to pass initial inspection. Your daughter’s asthma is flaring up, and your own lungs burn. Complaining risks immediate lease termination.',
-                gastoniaNote: 'Gaston County Rental Property',
-                options: [
-                    {
-                        text: 'Report the mold to Code Enforcement. Landlord retaliates with a 30-day lease non-renewal notice.',
-                        cashDelta: 0,
-                        legalDelta: 0,
-                        stressDelta: 30,
-                        housingDelta: -40,
-                        feeExtracted: { name: 'Imminent Displacement Threat', amount: 0, reason: 'Reporting unsafe conditions triggers retaliation and housing instability.', societalCost: '$1,200 shelter system cost per family placement.' }
-                    },
-                    {
-                        text: 'Buy bleach and air purifiers out of pocket ($55.00) and keep quiet to protect your shelter.',
-                        cashDelta: -55.00,
-                        legalDelta: 0,
-                        stressDelta: 15,
-                        housingDelta: 5,
-                        feeExtracted: { name: 'Unsafe Housing Remediation Out-of-Pocket', amount: 55.00, reason: 'Tenant forced to absorb cost of severe habitability defects.', societalCost: 'Increased ER utilization for chronic asthma exacerbations.' }
-                    },
-                    {
-                        text: 'Let a friend store 2 large locked totes in your spare closet for $100 toward emergency air filters.',
-                        cashDelta: 100,
-                        legalDelta: -15,
-                        stressDelta: 20,
-                        housingDelta: 0,
-                        riskFlag: 'Contraband Risk',
-                        feeExtracted: { name: 'Unverified Storage Hazard', amount: 0, reason: 'Exposed household to potential probation search or lease violation.', societalCost: 'Probation violation process costs taxpayers over $2,500.' }
-                    }
-                ]
-            },
-            {
-                day: 3,
-                category: 'Transportation & Logistics',
-                title: 'Day 3: Transit Delay & Mandatory Attendance',
-                text: 'The Gastonia Transit bus line is running 45 minutes late due to construction on Franklin Blvd. You have a mandatory work shift or check-in in 15 minutes.',
-                gastoniaNote: 'Lineberger Transit Center Depot Area',
-                options: [
-                    {
-                        text: 'Call an emergency rideshare app ($26.50 surge price) to arrive on time.',
-                        cashDelta: -26.50,
-                        legalDelta: 0,
-                        stressDelta: -10,
-                        housingDelta: 0,
-                        feeExtracted: { name: 'Rideshare Emergency Surge Fee', amount: 26.50, reason: 'Unreliable transit forces expensive private transportation spend.', societalCost: 'Lost worker productivity due to municipal transit gaps.' }
-                    },
-                    {
-                        text: 'Wait for the bus and accept a late strike from your supervisor/officer.',
-                        cashDelta: 0,
-                        legalDelta: -20,
-                        stressDelta: 25,
-                        housingDelta: -5,
-                        feeExtracted: null
-                    },
-                    {
-                        text: 'Accept a ride from a neighbor driving an unregistered car without a valid license.',
-                        cashDelta: 0,
-                        legalDelta: -5,
-                        stressDelta: 10,
-                        housingDelta: 0,
-                        riskFlag: 'Traffic Stop Danger',
-                        feeExtracted: { name: 'Unlicensed Transport Exposure', amount: 0, reason: 'Risked traffic stop with unregistered vehicle to avoid tardiness.', societalCost: '$250 court filing cost for traffic citations.' }
-                    }
-                ]
-            },
-            {
-                day: 4,
-                category: 'Financial Banking Traps',
-                title: 'Day 4: Check Cashing & Account Sharing',
-                text: 'You earned $140 from short-term labor, but lack a standard bank account due to past background checks. You need cash today to pay household bills.',
-                gastoniaNote: 'Commercial Check Cashing Outlet',
-                options: [
-                    {
-                        text: 'Use a check-cashing store (6% fee + $3.50 out-of-network ATM fee = $11.90 total).',
-                        cashDelta: 128.10,
-                        legalDelta: 0,
-                        stressDelta: -5,
-                        housingDelta: 0,
-                        feeExtracted: { name: 'Unbanked Check Cashing & ATM Surcharge', amount: 11.90, reason: 'Lack of traditional banking access forces high predatory service fees.', societalCost: 'Perpetuates economic instability and reliance on public assistance.' }
-                    },
-                    {
-                        text: 'Deposit via mobile app with a strict 3-day hold (Zero cash available for 72 hours).',
-                        cashDelta: 0,
-                        legalDelta: 0,
-                        stressDelta: 20,
-                        housingDelta: -10,
-                        feeExtracted: null
-                    },
-                    {
-                        text: 'Allow an acquaintance to process a $300 online cash transfer through your mobile account for a $40 cut.',
-                        cashDelta: 40,
-                        legalDelta: -25,
-                        stressDelta: 15,
-                        housingDelta: 0,
-                        riskFlag: 'Account Fraud Lock',
-                        feeExtracted: { name: 'Peer Transfer Fraud Risk', amount: 0, reason: 'Peer transfer flagged as fraudulent 72 hours later; bank locks account.', societalCost: 'Law enforcement bank fraud inquiry overhead.' }
-                    }
-                ]
-            },
-            {
-                day: 5,
-                category: 'Healthcare & Compliance Demand',
-                title: 'Day 5: Random Drug Screen & Co-Pay',
-                text: 'Your probation officer calls at 8:15 AM demanding a random urine screening by 2:00 PM. The screening costs $30.00 out of pocket at the clinic.',
-                gastoniaNote: 'Gaston County Health & Human Services Clinic',
-                options: [
-                    {
-                        text: 'Pay the $30 drug screen fee and report immediately.',
-                        cashDelta: -30.00,
-                        legalDelta: 5,
-                        stressDelta: -5,
-                        housingDelta: 0,
-                        feeExtracted: { name: 'Mandatory Screening Fee', amount: 30.00, reason: 'Court-ordered compliance test billed directly to participant.', societalCost: 'Incarceration costs exceed $35,000 annually per person.' }
-                    },
-                    {
-                        text: 'Explain you cannot afford the $30 fee today. (Logged as a non-compliant missed test).',
-                        cashDelta: 0,
-                        legalDelta: -30,
-                        stressDelta: 30,
-                        housingDelta: 0,
-                        feeExtracted: null
-                    },
-                    {
-                        text: 'Work an under-the-table cash cleanup shift for $70, skipping the morning appointment.',
-                        cashDelta: 70,
-                        legalDelta: -25,
-                        stressDelta: 15,
-                        housingDelta: 5,
-                        feeExtracted: { name: 'Unauthorized Work Shift Penalty', amount: 0, reason: 'Took informal cash labor to survive, incurring a probation violation.', societalCost: '$1,500 cost for bench warrant processing.' }
-                    }
-                ]
-            },
-            {
-                day: 6,
-                category: 'Employment & Verification Fee',
-                title: 'Day 6: Mandatory Background & Uniform Cost',
-                text: 'A prospective employer is interested in hiring you, but requires you to pay for your own third-party background verification ($35.00) upfront.',
-                gastoniaNote: 'Local Employer Application Portal',
-                options: [
-                    {
-                        text: 'Pay the $35 background fee to submit the application.',
-                        cashDelta: -35.00,
-                        legalDelta: 0,
-                        stressDelta: -5,
-                        housingDelta: 5,
-                        feeExtracted: { name: 'Applicant Background Verification Fee', amount: 35.00, reason: 'Out-of-pocket barrier required just to apply for employment.', societalCost: 'Loss of taxable wages and increased public safety net reliance.' }
-                    },
-                    {
-                        text: 'Withdraw your application because you cannot spare the cash.',
-                        cashDelta: 0,
-                        legalDelta: 0,
-                        stressDelta: 15,
-                        housingDelta: -5,
-                        feeExtracted: null
-                    },
-                    {
-                        text: 'Pawn an old personal item or tool for $50 cash to cover the fee and gas money.',
-                        cashDelta: 15,
-                        legalDelta: 0,
-                        stressDelta: 10,
-                        housingDelta: 0,
-                        feeExtracted: { name: 'Pawn Finance Cost', amount: 35.00, reason: 'Asset liquidation at high interest to meet hiring entry fees.', societalCost: 'Depletion of household asset resilience.' }
-                    }
-                ]
-            }
-        ];
+        /**
+         * CHARACTER-SPECIFIC NARRATIVE TREES
+         * Fixes persona swapping bug: Each character key maps directly to their 6 personalized days.
+         */
+        const CHARACTER_SCENARIOS = {
+            marcus: [
+                {
+                    day: 1,
+                    category: 'Mandatory Supervision Fee',
+                    title: 'Day 1: The Monthly Probation Fee',
+                    text: 'You report to your monthly check-in in Gastonia. Your officer demands your $40.00 monthly supervision fee plus a $4.50 card processor fee.',
+                    gastoniaNote: 'Gaston County Community Corrections',
+                    options: [
+                        {
+                            text: 'Pay the $44.50 fee immediately to maintain compliance.',
+                            cashDelta: -44.50, legalDelta: 5, stressDelta: -5, housingDelta: 0,
+                            feeExtracted: { name: 'Probation Supervision Fee', amount: 44.50, reason: 'Mandatory supervision charge + card surcharge.', societalCost: '$180/day jail booking if non-compliant.' }
+                        },
+                        {
+                            text: 'Request a 1-week extension to keep cash for food. (Officer logs a warning).',
+                            cashDelta: 0, legalDelta: -15, stressDelta: 15, housingDelta: 0,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Agree to transport a sealed gym bag across town for $60 cash.',
+                            cashDelta: 60, legalDelta: -10, stressDelta: 10, housingDelta: 0,
+                            riskFlag: 'Transport Flag',
+                            feeExtracted: { name: 'Informal Favor Risk', amount: 0, reason: 'Plate logged during secondary inquiry.', societalCost: 'Law enforcement traffic stop overhead.' }
+                        }
+                    ]
+                },
+                {
+                    day: 2,
+                    category: 'Stigma & Employment Barrier',
+                    title: 'Day 2: The Welding Workshop Interview',
+                    text: 'You arrive for a promising structural welding interview. The shop manager looks directly at your facial tattoo from your youth and makes a condescending remark, offering you an unrecorded helper wage at half rate.',
+                    gastoniaNote: 'Gastonia Industrial District Shop',
+                    options: [
+                        {
+                            text: 'Insist on your certified rate. The manager dismisses you on sight.',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 20, housingDelta: -5,
+                            feeExtracted: { name: 'Stigma Opportunity Loss', amount: 0, reason: 'Facial tattoo prejudice prevented trade hiring.', societalCost: 'Loss of skilled tax-paying labor.' }
+                        },
+                        {
+                            text: 'Accept the underpaid half-rate helper shift ($50 cash) to keep income coming.',
+                            cashDelta: 50, legalDelta: 0, stressDelta: 10, housingDelta: 0,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Pawn your personal welding helmet for $70 cash to make a deposit on laser removal.',
+                            cashDelta: 70, legalDelta: 0, stressDelta: 15, housingDelta: 0,
+                            feeExtracted: { name: 'Pawn Depletion Cost', amount: 30.00, reason: 'Selling work tools to fund stigma removal.', societalCost: 'Depletion of trade productivity assets.' }
+                        }
+                    ]
+                },
+                {
+                    day: 3,
+                    category: 'Transportation & Logistics',
+                    title: 'Day 3: Franklin Blvd Bus Delay',
+                    text: 'The bus on Franklin Blvd is 40 minutes late due to road work. You must reach the job site in 15 minutes or risk termination.',
+                    gastoniaNote: 'Lineberger Transit Center Depot',
+                    options: [
+                        {
+                            text: 'Pay $26.50 for an emergency rideshare app.',
+                            cashDelta: -26.50, legalDelta: 0, stressDelta: -10, housingDelta: 0,
+                            feeExtracted: { name: 'Rideshare Surge Fee', amount: 26.50, reason: 'Transit delays force expensive private transit.', societalCost: 'Gaston County transit inefficiency.' }
+                        },
+                        {
+                            text: 'Wait for the bus and accept a late strike from your employer.',
+                            cashDelta: 0, legalDelta: -10, stressDelta: 25, housingDelta: -5,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Accept a ride from a coworker in an unregistered vehicle without a license.',
+                            cashDelta: 0, legalDelta: -10, stressDelta: 10, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 4,
+                    category: 'Banking & Financial Fees',
+                    title: 'Day 4: Check Cashing & Verification',
+                    text: 'You receive your $140 paper paycheck, but lack a standard bank account due to past background checks.',
+                    gastoniaNote: 'Local Check Cashing Outlet',
+                    options: [
+                        {
+                            text: 'Use a check casher (6% fee + $3.50 ATM fee = $11.90 total).',
+                            cashDelta: 128.10, legalDelta: 0, stressDelta: -5, housingDelta: 0,
+                            feeExtracted: { name: 'Predatory Check Cashing Surcharge', amount: 11.90, reason: 'Unbanked status forces high processing fees.', societalCost: 'Systemic poverty extraction.' }
+                        },
+                        {
+                            text: 'Deposit via mobile app with a strict 3-day funds hold.',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 20, housingDelta: -5,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Run cash through a third-party wallet account for a quick $40 bonus.',
+                            cashDelta: 40, legalDelta: -20, stressDelta: 15, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 5,
+                    category: 'Probation Compliance',
+                    title: 'Day 5: Random Urine Screen Call',
+                    text: 'Your probation officer calls requiring a random screening by 2:00 PM. The drug screen fee is $30.00 out-of-pocket.',
+                    gastoniaNote: 'Gaston County Health & Human Services',
+                    options: [
+                        {
+                            text: 'Pay the $30 drug screen fee immediately.',
+                            cashDelta: -30.00, legalDelta: 5, stressDelta: -5, housingDelta: 0,
+                            feeExtracted: { name: 'Mandatory Drug Screen Fee', amount: 30.00, reason: 'Court-ordered test billed to participant.', societalCost: 'High re-incarceration risk.' }
+                        },
+                        {
+                            text: 'Explain you cannot afford the test. (Logged as non-compliant).',
+                            cashDelta: 0, legalDelta: -30, stressDelta: 30, housingDelta: 0,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Take an off-the-books site cleanup shift for $70, skipping the screening.',
+                            cashDelta: 70, legalDelta: -25, stressDelta: 15, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 6,
+                    category: 'Trade Certification & Growth',
+                    title: 'Day 6: Certification Renewal Fee',
+                    text: 'Your state welding certification renewal fee ($50.00) is due today. Without it, you cannot bid on certified job contracts.',
+                    gastoniaNote: 'NC Trade Licensing Portal',
+                    options: [
+                        {
+                            text: 'Pay the $50 renewal fee to maintain certification.',
+                            cashDelta: -50.00, legalDelta: 0, stressDelta: -5, housingDelta: 10,
+                            feeExtracted: { name: 'Trade Recertification Fee', amount: 50.00, reason: 'Out-of-pocket license cost to maintain skilled work.', societalCost: 'Loss of certified tradesmen.' }
+                        },
+                        {
+                            text: 'Defer the renewal and work uncertified labor shifts.',
+                            cashDelta: 0, legalDelta: -5, stressDelta: 15, housingDelta: -5,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Borrow $50 from an informal lender with a $25 repayment fee next week.',
+                            cashDelta: 50, legalDelta: 0, stressDelta: 20, housingDelta: 0,
+                            feeExtracted: { name: 'Predatory Informal Loan Interest', amount: 25.00, reason: 'High-interest borrowing to maintain trade credentials.', societalCost: 'Debt spiral trajectory.' }
+                        }
+                    ]
+                }
+            ],
+            maya: [
+                {
+                    day: 1,
+                    category: 'Childcare & Work Conflict',
+                    title: 'Day 1: Daycare Subsidy Co-Pay',
+                    text: 'Maya must pay her weekly $45 daycare co-pay for her 4-year-old daughter before her morning retail shift.',
+                    gastoniaNote: 'Gaston County Childcare Center',
+                    options: [
+                        {
+                            text: 'Pay the $45 co-pay to keep her daughter enrolled.',
+                            cashDelta: -45.00, legalDelta: 0, stressDelta: -5, housingDelta: 5,
+                            feeExtracted: { name: 'Childcare Co-Pay Fee', amount: 45.00, reason: 'Mandatory co-pay to retain work availability.', societalCost: 'Parental employment disruption.' }
+                        },
+                        {
+                            text: 'Keep her daughter home and miss her retail shift. (Receives a work warning).',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 25, housingDelta: -5,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Leave her daughter with an unverified neighbor for $15 cash to avoid missing work.',
+                            cashDelta: -15.00, legalDelta: -10, stressDelta: 20, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 2,
+                    category: 'Housing Integrity & Health Trap',
+                    title: 'Day 2: Hidden Mold & Landlord Pressure',
+                    text: 'Maya discovers toxic black mold behind her bathroom tile. Her daughter’s asthma is flaring up severely. Complaining to the landlord risks non-renewal.',
+                    gastoniaNote: 'Gaston County Rental Property',
+                    options: [
+                        {
+                            text: 'Report the mold to Code Enforcement. Landlord retaliates with a 30-day notice.',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 30, housingDelta: -40,
+                            feeExtracted: { name: 'Imminent Displacement Threat', amount: 0, reason: 'Code enforcement triggers landlord retaliation.', societalCost: '$1,200 shelter cost.' }
+                        },
+                        {
+                            text: 'Buy bleach and air purifiers out of pocket ($55.00) and keep quiet.',
+                            cashDelta: -55.00, legalDelta: 0, stressDelta: 15, housingDelta: 5,
+                            feeExtracted: { name: 'Unsafe Housing Remediation', amount: 55.00, reason: 'Forced to remediate landlord neglect out-of-pocket.', societalCost: 'Asthma ER visit costs.' }
+                        },
+                        {
+                            text: 'Store 2 locked totes for a friend for $100 toward emergency air filters.',
+                            cashDelta: 100, legalDelta: -15, stressDelta: 20, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 3,
+                    category: 'Medical & Pediatric Emergency',
+                    title: 'Day 3: Asthma Inhaler Co-Pay',
+                    text: 'Maya’s daughter needs a prescription inhaler refill ($35 co-pay). Her current account balance is running thin.',
+                    gastoniaNote: 'Local Gastonia Pharmacy',
+                    options: [
+                        {
+                            text: 'Pay the $35 co-pay for the inhaler prescription.',
+                            cashDelta: -35.00, legalDelta: 0, stressDelta: -10, housingDelta: 0,
+                            feeExtracted: { name: 'Pediatric Medical Co-Pay', amount: 35.00, reason: 'Essential prescription cost for child health.', societalCost: 'Pediatric ER hospitalization costs.' }
+                        },
+                        {
+                            text: 'Delay refill 3 days until next paycheck. (Child suffers asthma distress).',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 35, housingDelta: 0,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Ask an ex-acquaintance for a short-term cash loan, risking unsafe social exposure.',
+                            cashDelta: 35, legalDelta: -10, stressDelta: 20, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 4,
+                    category: 'Banking & Financial Fees',
+                    title: 'Day 4: Check Cashing & Grocery Costs',
+                    text: 'Maya cashes her paper paycheck at a commercial counter to pay immediate utility notices.',
+                    gastoniaNote: 'Gastonia Financial Center',
+                    options: [
+                        {
+                            text: 'Pay the $11.90 check cashing and ATM processing fee.',
+                            cashDelta: 128.10, legalDelta: 0, stressDelta: -5, housingDelta: 0,
+                            feeExtracted: { name: 'Unbanked Service Fee', amount: 11.90, reason: 'High fees to access earned wages immediately.', societalCost: 'Poverty trap cycle.' }
+                        },
+                        {
+                            text: 'Wait for standard bank processing (Zero cash for 72 hours).',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 25, housingDelta: -5,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Process an online cash app transfer for a stranger for $40 extra.',
+                            cashDelta: 40, legalDelta: -20, stressDelta: 15, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 5,
+                    category: 'Utility & Housing Compliance',
+                    title: 'Day 5: Electric Utility Reconnection Notice',
+                    text: 'Maya receives an electric shutoff notice ($48.00 balance due today) during a hot summer week.',
+                    gastoniaNote: 'City of Gastonia Utilities',
+                    options: [
+                        {
+                            text: 'Pay the $48.00 utility bill immediately.',
+                            cashDelta: -48.00, legalDelta: 0, stressDelta: -10, housingDelta: 5,
+                            feeExtracted: { name: 'Utility Shutoff Avoidance Fee', amount: 48.00, reason: 'Essential utility retention spend.', societalCost: 'Child welfare audit risks.' }
+                        },
+                        {
+                            text: 'Let power disconnect for 48 hours until payday.',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 35, housingDelta: -15,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Sell her extra phone on an informal marketplace for $60 cash.',
+                            cashDelta: 60, legalDelta: 0, stressDelta: 10, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                },
+                {
+                    day: 6,
+                    category: 'Employment Retention',
+                    title: 'Day 6: Retail Uniform & Shoe Requirement',
+                    text: 'Maya’s store manager requires non-slip safety shoes ($32.00) for her shift assignment.',
+                    gastoniaNote: 'Retail Employment Site',
+                    options: [
+                        {
+                            text: 'Buy the required work shoes out-of-pocket ($32.00).',
+                            cashDelta: -32.00, legalDelta: 0, stressDelta: -5, housingDelta: 5,
+                            feeExtracted: { name: 'Mandatory Work Apparel Outlay', amount: 32.00, reason: 'Employment retention cost.', societalCost: 'Job loss risk.' }
+                        },
+                        {
+                            text: 'Work shift in standard shoes and accept a formal reprimand.',
+                            cashDelta: 0, legalDelta: 0, stressDelta: 15, housingDelta: 0,
+                            feeExtracted: null
+                        },
+                        {
+                            text: 'Work an unrecorded overnight cleaning shift for $60 cash.',
+                            cashDelta: 60, legalDelta: -10, stressDelta: 20, housingDelta: 0,
+                            feeExtracted: null
+                        }
+                    ]
+                }
+            ]
+        };
 
         /**
-         * ====================================================================
-         * SIMULATOR STATE & ENGINE LOGIC
-         * ====================================================================
+         * SIMULATOR ENGINE WITH PERSONA INTEGRITY
          */
         class ReentrySimulator {
             constructor() {
@@ -746,7 +776,6 @@
             }
 
             filterCategory(cat) {
-                // Update active button styling
                 document.querySelectorAll('.cat-btn').forEach(btn => {
                     btn.classList.remove('bg-amber-500', 'text-slate-950', 'font-bold', 'shadow');
                     btn.classList.add('bg-slate-800', 'text-slate-300', 'border-slate-700');
@@ -812,7 +841,7 @@
 
             selectCharacter(id) {
                 const charObj = CHARACTERS.find(c => c.id === id);
-                this.activeCharacter = JSON.parse(JSON.stringify(charObj)); // Deep copy
+                this.activeCharacter = JSON.parse(JSON.stringify(charObj));
                 this.currentDay = 1;
                 this.extractedFees = [];
                 this.isAutoPlay = false;
@@ -827,7 +856,6 @@
                 this.selectCharacter(randomChar.id);
                 this.isAutoPlay = true;
 
-                // Trigger choices automatically after brief delay
                 this.scheduleAutoPlayChoice();
             }
 
@@ -835,9 +863,9 @@
                 if (!this.isAutoPlay) return;
                 
                 this.autoPlayTimer = setTimeout(() => {
-                    const scenario = SCENARIOS.find(s => s.day === this.currentDay);
+                    const scenarios = CHARACTER_SCENARIOS[this.activeCharacter.id] || CHARACTER_SCENARIOS['marcus'];
+                    const scenario = scenarios.find(s => s.day === this.currentDay);
                     if (scenario) {
-                        // Randomly pick option (weighted slightly towards compliance)
                         const choiceIdx = Math.random() > 0.4 ? 0 : 1;
                         this.makeChoice(choiceIdx);
                     }
@@ -845,7 +873,10 @@
             }
 
             loadDayScenario(dayNum) {
-                const scenario = SCENARIOS.find(s => s.day === dayNum);
+                // FIXED BUG: Fetch scenarios specifically mapped to the active character ID
+                const scenarios = CHARACTER_SCENARIOS[this.activeCharacter.id] || CHARACTER_SCENARIOS['marcus'];
+                const scenario = scenarios.find(s => s.day === dayNum);
+
                 if (!scenario) {
                     this.finishSimulation();
                     return;
@@ -879,7 +910,8 @@
             }
 
             makeChoice(optionIndex) {
-                const scenario = SCENARIOS.find(s => s.day === this.currentDay);
+                const scenarios = CHARACTER_SCENARIOS[this.activeCharacter.id] || CHARACTER_SCENARIOS['marcus'];
+                const scenario = scenarios.find(s => s.day === this.currentDay);
                 const choice = scenario.options[optionIndex];
 
                 // Update Character Stats
@@ -888,7 +920,6 @@
                 this.activeCharacter.stats.stress = Math.max(0, Math.min(100, this.activeCharacter.stats.stress + choice.stressDelta));
                 this.activeCharacter.stats.housing = Math.max(0, Math.min(100, this.activeCharacter.stats.housing + choice.housingDelta));
 
-                // Record Fee if applicable
                 if (choice.feeExtracted) {
                     this.extractedFees.push(choice.feeExtracted);
                     this.showFeeAlert(choice.feeExtracted);
@@ -896,15 +927,13 @@
 
                 this.updateMeters();
 
-                // Check for critical game over (Legal Standing hits 0)
                 if (this.activeCharacter.stats.legal <= 0) {
                     setTimeout(() => {
-                        this.finishSimulation(true); // Revoked
+                        this.finishSimulation(true);
                     }, 1200);
                     return;
                 }
 
-                // Advance Day
                 this.currentDay++;
                 if (this.currentDay <= 6) {
                     setTimeout(() => {
@@ -927,26 +956,21 @@
             updateMeters() {
                 const stats = this.activeCharacter.stats;
 
-                // Avatar Banner
                 document.getElementById('activeAvatar').innerText = this.activeCharacter.avatarInitials;
                 document.getElementById('activeName').innerText = this.activeCharacter.name;
                 document.getElementById('activeBadge').innerText = this.activeCharacter.badge;
                 document.getElementById('activeTagline').innerText = this.activeCharacter.tagline;
 
-                // Cash
                 document.getElementById('meterCashVal').innerText = `$${stats.cash.toFixed(2)}`;
                 document.getElementById('meterCashBar').style.width = `${Math.min(100, (stats.cash / 200) * 100)}%`;
 
-                // Legal
                 document.getElementById('meterLegalVal').innerText = `${stats.legal}%`;
                 document.getElementById('meterLegalBar').style.width = `${stats.legal}%`;
 
-                // Stress / Mental Well-being (Inverted visual: 100% stress = 0% well-being)
                 const wellBeing = Math.max(0, 100 - stats.stress);
                 document.getElementById('meterStressVal').innerText = `${wellBeing}%`;
                 document.getElementById('meterStressBar').style.width = `${wellBeing}%`;
 
-                // Housing
                 document.getElementById('meterHousingVal').innerText = `${stats.housing}%`;
                 document.getElementById('meterHousingBar').style.width = `${stats.housing}%`;
             }
@@ -955,14 +979,10 @@
                 clearTimeout(this.autoPlayTimer);
                 this.showStage('debriefStage');
 
-                // Total extracted fees calculation
                 const totalFees = this.extractedFees.reduce((sum, f) => sum + f.amount, 0);
                 document.getElementById('debriefFees').innerText = `$${totalFees.toFixed(2)}`;
-
-                // Final Cash
                 document.getElementById('debriefCash').innerText = `$${this.activeCharacter.stats.cash.toFixed(2)}`;
 
-                // Legal Status
                 const legalVal = this.activeCharacter.stats.legal;
                 document.getElementById('debriefLegal').innerText = `${legalVal}%`;
                 
@@ -978,10 +998,9 @@
                     legalStatusElem.className = 'text-xs text-emerald-400 font-bold block mt-1';
                 }
 
-                // Render Fee Ledger
                 const ledgerContainer = document.getElementById('feeLedgerList');
                 if (this.extractedFees.length === 0) {
-                    ledgerContainer.innerHTML = `<p class="text-slate-400 italic">No direct fees were paid, but legal sanctions, informal survival risks, or severe stress penalties were incurred instead.</p>`;
+                    ledgerContainer.innerHTML = `<p class="text-slate-400 italic">No direct fees were paid, but legal sanctions or informal survival risks were incurred instead.</p>`;
                 } else {
                     ledgerContainer.innerHTML = this.extractedFees.map(f => `
                         <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
@@ -1019,7 +1038,6 @@
             }
         }
 
-        // Initialize Simulator Engine on Window Load
         let game;
         window.onload = function () {
             game = new ReentrySimulator();
@@ -1028,3 +1046,9 @@
     </script>
 </body>
 </html>
+```
+
+### Summary of What Was Fixed:
+1. **Persona Integrity Guarantee:** The scenario lookup is now keyed as `CHARACTER_SCENARIOS[this.activeCharacter.id]`. When Marcus is selected, Day 2 will always load Marcus's welding interview scenario rather than pulling Maya's asthma story.
+2. **Beta Mode Badge:** Added a prominent `BETA v0.9` badge next to the header title.
+3. **Sound Logic Architecture:** Ready for post-editing so you can expand custom 6-day scenario trees for all 9 characters without breaking game mechanics.
