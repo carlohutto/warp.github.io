@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marginal — An Interactive Reentry & Poverty Simulator</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        slate: {
+                            850: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500/10 border border-amber-500/30 p-2 rounded-lg text-amber-400">
+                    <i class="fa-solid fa-scale-unbalanced-flip text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-white tracking-tight flex items-center gap-2">
+                        <span>MARGINAL</span>
+                        <span class="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/30 uppercase font-semibold">Simulator</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 hidden sm:block">A Realistic Reentry & Poverty Awareness Experience</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button id="resetAppBtn" onclick="game.resetToStart()" class="text-xs text-slate-400 hover:text-amber-400 transition flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-900">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>Restart</span>
+                </button>
+                <a href="#debrief" id="warpLinkBtn" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg transition shadow-md">
+                    WARP Initiatives
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN GAME CONTAINER -->
+    <main id="appContainer" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+        <!-- STAGE 1: INTRO / CHARACTER SELECT -->
+        <section id="selectStage" class="space-y-8 animate-fadeIn">
+            <!-- Header banner -->
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <div class="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Systemic Poverty & Reentry Simulator</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white serif-font tracking-tight">
+                    Surviving on the Margins
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Over 6 days, navigate real-world financial traps, court conditions, transit barriers, and systemic "poor people fees." Choose a persona below or test the simulator on <strong>Auto-Play</strong> to watch systemic conditions unfold.
+                </p>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-2" id="categoryFilters">
+                    <button onclick="game.filterCategory('all')" class="cat-btn active text-xs px-4 py-2 rounded-xl font-medium transition bg-amber-500 text-slate-950 font-bold shadow">
+                        All Personas (9)
+                    </button>
+                    <button onclick="game.filterCategory('adult')" class="cat-btn text-xs px-4 py-2 rounded-xl font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700">
+                        Adult Returning Citizens
+                    </button>
+                    <button onclick="game.filterCategory('young')" class="cat-btn text-xs px-4 py-2 rounded-xl font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700">
+                        Young Adults & Family Impact
+                    </button>
+                    <button onclick="game.filterCategory('extreme')" class="cat-btn text-xs px-4 py-2 rounded-xl font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700">
+                        Extreme Hardship & Barriers
+                    </button>
+                </div>
+            </div>
+
+            <!-- Character Cards Grid -->
+            <div id="characterGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+            <!-- Auto Play Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-base">Unbiased System Simulation (Auto-Play)</h4>
+                        <p class="text-slate-400 text-xs">Let the simulation auto-run choices for a randomly assigned character to observe how fast systemic fees degrade stability.</p>
+                    </div>
+                </div>
+                <button onclick="game.startAutoPlay()" class="w-full md:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 font-bold px-6 py-3 rounded-xl transition text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Run Auto Simulator</span>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- STAGE 2: ACTIVE GAMEPLAY SIMULATION -->
+        <section id="gameStage" class="hidden space-y-6 animate-fadeIn">
+            
+            <!-- REAL-TIME STATUS BAR METERS -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4">
+                
+                <!-- Character Mini Banner -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div id="activeAvatar" class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold flex items-center justify-center text-lg shrink-0">
+                            <!-- Initials -->
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 id="activeName" class="text-lg font-bold text-white">Character Name</h3>
+                                <span id="activeBadge" class="text-xs bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-0.5 rounded-full font-medium">Tag</span>
+                            </div>
+                            <p id="activeTagline" class="text-xs text-slate-400">Persona Tagline</p>
+                        </div>
+                    </div>
+
+                    <!-- Day & Turn Indicator -->
+                    <div class="flex items-center gap-3">
+                        <div class="text-right">
+                            <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Simulation Timeline</div>
+                            <div id="dayIndicator" class="text-sm font-bold text-amber-400">Day 1 of 6</div>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400 font-bold text-sm">
+                            <span id="dayNum">1</span>/6
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 Live Resource Meters -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Cash -->
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 shadow-inner">
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="text-slate-400 font-medium flex items-center gap-1.5"><i class="fa-solid fa-wallet text-emerald-400"></i> Cash On Hand</span>
+                            <span id="meterCashVal" class="font-bold text-white">$140</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="meterCashBar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 70%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Legal Standing -->
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 shadow-inner">
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="text-slate-400 font-medium flex items-center gap-1.5"><i class="fa-solid fa-scale-balanced text-sky-400"></i> Legal Standing</span>
+                            <span id="meterLegalVal" class="font-bold text-white">85%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="meterLegalBar" class="bg-sky-500 h-full transition-all duration-500" style="width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Mental Health & Stress -->
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 shadow-inner">
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="text-slate-400 font-medium flex items-center gap-1.5"><i class="fa-solid fa-heart text-rose-400"></i> Mental Well-Being</span>
+                            <span id="meterStressVal" class="font-bold text-white">60%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="meterStressBar" class="bg-rose-500 h-full transition-all duration-500" style="width: 60%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Housing & Stability -->
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 shadow-inner">
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="text-slate-400 font-medium flex items-center gap-1.5"><i class="fa-solid fa-house text-amber-400"></i> Housing Stability</span>
+                            <span id="meterHousingVal" class="font-bold text-white">75%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="meterHousingBar" class="bg-amber-500 h-full transition-all duration-500" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCENARIO CHOICE CARD -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+                
+                <!-- Event Title & Narrative -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <span id="scenarioCategory" class="text-xs uppercase tracking-widest font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
+                            Daily Situation
+                        </span>
+                        <span id="gastoniaTag" class="text-xs text-slate-400 font-medium flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-amber-400"></i> Gastonia / Gaston Co. Context
+                        </span>
+                    </div>
+
+                    <h2 id="scenarioTitle" class="text-2xl font-bold text-white serif-font">Scenario Title</h2>
+                    <p id="scenarioText" class="text-slate-300 text-sm sm:text-base leading-relaxed bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+                        Scenario story text will render here...
+                    </p>
+                </div>
+
+                <!-- Decision Options Header -->
+                <div class="pt-2">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Choose Your Action:</h4>
+                    <div id="optionsContainer" class="space-y-3">
+                        <!-- Options injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Systemic Fee Alert Box -->
+                <div id="feeAlert" class="hidden bg-amber-950/30 border border-amber-500/30 p-4 rounded-xl text-xs text-amber-200 flex items-start gap-3">
+                    <i class="fa-solid fa-receipt text-amber-400 text-lg shrink-0 mt-0.5"></i>
+                    <div>
+                        <span class="font-bold block text-amber-300">Systemic Toll Triggered:</span>
+                        <span id="feeAlertText">Fee description...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 3: DEBRIEF & SYSTEMIC TOLL REPORT -->
+        <section id="debriefStage" class="hidden space-y-8 animate-fadeIn">
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl space-y-8">
+                
+                <!-- Debrief Header -->
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <div class="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <span>Simulation Complete</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white serif-font">
+                        The Cost of Living on the Margin
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Here is the financial and systemic breakdown of the hidden "poor people fees" extracted during your simulation run.
+                    </p>
+                </div>
+
+                <!-- Summary Stat Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold block mb-1">Total Fees Extracted</span>
+                        <span id="debriefFees" class="text-3xl font-extrabold text-rose-400">$0.00</span>
+                        <span class="text-xs text-slate-400 block mt-1">In unavoidable systemic costs</span>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold block mb-1">Final Legal Standing</span>
+                        <span id="debriefLegal" class="text-3xl font-extrabold text-sky-400">0%</span>
+                        <span id="debriefLegalStatus" class="text-xs text-slate-400 block mt-1">Status result</span>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 text-center">
+                        <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold block mb-1">Remaining Cash</span>
+                        <span id="debriefCash" class="text-3xl font-extrabold text-emerald-400">$0</span>
+                        <span class="text-xs text-slate-400 block mt-1">Out of starting funds</span>
+                    </div>
+                </div>
+
+                <!-- Systemic Fees Ledger -->
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider flex items-center justify-between border-b border-slate-800 pb-3">
+                        <span><i class="fa-solid fa-list-check text-amber-400 mr-2"></i> Systemic Fee Ledger</span>
+                        <span class="text-xs text-slate-400 font-normal">Real-World Gastonia & NC Estimates</span>
+                    </h4>
+                    <div id="feeLedgerList" class="space-y-2 text-xs sm:text-sm text-slate-300">
+                        <!-- Ledger items inserted via JS -->
+                    </div>
+                </div>
+
+                <!-- WARP Initiative Call to Action Banner -->
+                <div class="bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 border border-amber-500/40 rounded-2xl p-6 sm:p-8 space-y-6">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div class="space-y-2 max-w-2xl">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-widest">How WARP Breaks This Cycle</span>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white serif-font">
+                                We Believe Probation Fines & Bus Passes Shouldn't Lead to Arrest.
+                            </h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                                Working Against Recidivism & Poverty (WARP) provides direct emergency assistance, court fee sponsorship, transportation support, and peer advocacy in Gastonia and surrounding communities.
+                            </p>
+                        </div>
+                        <div class="shrink-0 flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                            <button onclick="game.resetToStart()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold px-5 py-3 rounded-xl transition text-xs text-center">
+                                Try Another Persona
+                            </button>
+                            <a href="#donate" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition shadow-lg text-xs text-center flex items-center justify-center gap-2">
+                                <span>Support WARP's Mission</span>
+                                <i class="fa-solid fa-heart text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 Working Against Recidivism & Poverty (WARP). All rights reserved.</p>
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="https://app.candid.org/profile/16517092/working-against-recidivism-and-poverty-39-4239364/?pkId=13c99a05-b8ad-48ed-81f8-bbe890006516" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1">
+                    <i class="fa-solid fa-award text-amber-400"></i> Candid Platinum Verified
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SIMULATOR DATA & ENGINE SCRIPT -->
+    <script>
+        /**
+         * ====================================================================
+         * MARGINAL SIMULATOR CONFIGURATION & DATA STRUCTURES
+         * ====================================================================
+         * You can freely edit characters, stats, and scenario text right here!
+         */
+
+        const CHARACTERS = [
+            // CATEGORY 1: ADULT RETURNING CITIZENS
+            {
+                id: 'marcus',
+                category: 'adult',
+                name: 'Marcus',
+                age: 34,
+                badge: 'Regretted Stigma',
+                tagline: 'Clean 3 years, skilled welder, facing facial tattoo prejudice.',
+                bio: 'Marcus served time for non-violent offenses years ago. He completed welding certifications while incarcerated, but an ill-advised facial tattoo from his youth leads to immediate dismissal during job interviews.',
+                stats: { cash: 140, legal: 85, stress: 60, housing: 75 },
+                poType: 'Strict Officer (Demands weekly physical receipts)',
+                avatarInitials: 'M'
+            },
+            {
+                id: 'tasha',
+                category: 'adult',
+                name: 'Tasha',
+                age: 38,
+                badge: 'Trauma & PTSD',
+                tagline: 'Domestic violence survivor balancing court-mandated therapy co-pays.',
+                bio: 'Tasha is reentering society while carrying severe trauma. Court-ordered counseling is required for her probation, but each mandatory session requires a $45 out-of-pocket co-pay.',
+                stats: { cash: 90, legal: 80, stress: 80, housing: 70 },
+                poType: 'Impatient Officer (Views anxiety symptoms as non-compliance)',
+                avatarInitials: 'T'
+            },
+            {
+                id: 'james',
+                category: 'adult',
+                name: 'James',
+                age: 52,
+                badge: 'Senior & Debt',
+                tagline: 'Chronic back pain, heavy court debt, and driver license suspension.',
+                bio: 'James served a decade inside. He works hard despite chronic back pain, but over $1,200 in court fines and monthly supervision fees threaten to suspend his license.',
+                stats: { cash: 110, legal: 90, stress: 55, housing: 80 },
+                poType: 'Overloaded Officer (Slow to authorize travel permits)',
+                avatarInitials: 'J'
+            },
+
+            // CATEGORY 2: YOUNG ADULTS & FAMILY IMPACT
+            {
+                id: 'maya',
+                category: 'young',
+                name: 'Maya',
+                age: 24,
+                badge: 'Widowed Solo Mother',
+                tagline: 'Raising her asthmatic daughter after losing her husband to fentanyl.',
+                bio: 'After living in her car for 5 months, Maya finally moved into a low-cost apartment. She works retail while caring for her 4-year-old daughter who suffers from chronic asthma.',
+                stats: { cash: 160, legal: 95, stress: 85, housing: 75 },
+                poType: 'Social Services Auditor (Strict attendance rules for subsidy)',
+                avatarInitials: 'M'
+            },
+            {
+                id: 'deandre',
+                category: 'young',
+                name: 'Deandre',
+                age: 20,
+                badge: 'Intergenerational Shield',
+                tagline: 'Gig worker keeping family utilities on while brother is incarcerated.',
+                bio: 'Deandre delivers food on a moped around Gastonia to support his disabled mother and pay household utilities while his older brother finishes a prison sentence.',
+                stats: { cash: 125, legal: 95, stress: 65, housing: 70 },
+                poType: 'Suspicious Officer (Conducts surprise home checks)',
+                avatarInitials: 'D'
+            },
+            {
+                id: 'chloe',
+                category: 'young',
+                name: 'Chloe',
+                age: 22,
+                badge: 'Digital Exclusion',
+                tagline: 'Former foster youth pursuing CNA license without Wi-Fi or co-signers.',
+                bio: 'Chloe aged out of foster care. She relies on fast-food Wi-Fi to submit medical coursework and struggles to afford mandatory uniform fees and background check costs.',
+                stats: { cash: 85, legal: 90, stress: 70, housing: 65 },
+                poType: 'Financial Aid Compliance Officer',
+                avatarInitials: 'C'
+            },
+
+            // CATEGORY 3: EXTREME HARDSHIP & SYSTEMIC BARRIERS
+            {
+                id: 'robert',
+                category: 'extreme',
+                name: 'Robert',
+                age: 45,
+                badge: 'Dual Diagnosis',
+                tagline: 'Bipolar disorder and probation urine test fees create constant friction.',
+                bio: 'Robert wants to stay clean and steady, but prescription co-pays ($35) and mandatory drug test fees ($30) force him to choose between medicine and legal compliance.',
+                stats: { cash: 75, legal: 70, stress: 85, housing: 50 },
+                poType: 'Strict & Unforgiving Officer (Random drug testing demands)',
+                avatarInitials: 'R'
+            },
+            {
+                id: 'tamera',
+                category: 'extreme',
+                name: 'Tamera',
+                age: 31,
+                badge: 'DV Survivor',
+                tagline: 'Navigating domestic violence protective orders and job applications.',
+                bio: 'Tamera is staying at a local shelter after defending herself from an abusive ex-partner. She struggles to provide a permanent home address required by employers.',
+                stats: { cash: 150, legal: 85, stress: 75, housing: 60 },
+                poType: 'Supportive but Bound Officer',
+                avatarInitials: 'T'
+            },
+            {
+                id: 'carlos',
+                category: 'extreme',
+                name: 'Carlos',
+                age: 42,
+                badge: 'Transit Desert',
+                tagline: 'Living in rural Gaston County with a revoked license and no bus route.',
+                bio: 'Carlos lives 15 miles from the Gaston County Courthouse. Without public transit, getting to probation check-ins requires paying $35 for rideshares or risking driving without a license.',
+                stats: { cash: 100, legal: 82, stress: 60, housing: 85 },
+                poType: 'Remote Officer (Insists on in-person reporting)',
+                avatarInitials: 'C'
+            }
+        ];
+
+        // DYNAMIC SCENARIO DATABASE WITH 3-OPTION DECISION TREES
+        const SCENARIOS = [
+            {
+                day: 1,
+                category: 'Mandatory Supervision Fee',
+                title: 'Day 1: The Monthly Probation Fee',
+                text: 'You report to your monthly check-in. Your officer reminds you that your mandatory $40 monthly supervision fee is due today, plus a mandatory $4.50 processing fee if paying by card.',
+                gastoniaNote: 'Gaston County Community Corrections Office',
+                options: [
+                    {
+                        text: 'Pay the $44.50 total fee immediately to maintain legal compliance.',
+                        cashDelta: -44.50,
+                        legalDelta: 5,
+                        stressDelta: -5,
+                        housingDelta: 0,
+                        feeExtracted: { name: 'Probation Supervision & Card Fee', amount: 44.50, reason: 'Mandatory monthly supervision fee + debit processor surcharge.', societalCost: '$180/day jail booking cost if arrested for non-payment.' }
+                    },
+                    {
+                        text: 'Request a 1-week extension to keep cash for groceries. (Triggers a warning flag on your record).',
+                        cashDelta: 0,
+                        legalDelta: -15,
+                        stressDelta: 15,
+                        housingDelta: 0,
+                        feeExtracted: null
+                    },
+                    {
+                        text: 'Agree to drop off a locked envelope across town for an acquaintance who promises $60 cash.',
+                        cashDelta: 60,
+                        legalDelta: -10,
+                        stressDelta: 10,
+                        housingDelta: 0,
+                        riskFlag: 'Unchecked Transport',
+                        feeExtracted: { name: 'High-Risk Favor Risk Surcharge', amount: 0, reason: 'Accepted informal transport cash; vehicle plate logged in secondary inquiry.', societalCost: 'Potential secondary law enforcement involvement.' }
+                    }
+                ]
+            },
+            {
+                day: 2,
+                category: 'Housing Integrity & Health Trap',
+                title: 'Day 2: Hidden Mold & Landlord Pressure',
+                text: 'After 5 months living in a vehicle, you finally secured an apartment. Today you discover toxic black mold behind the bathroom tile, hidden under fresh paint to pass initial inspection. Your daughter’s asthma is flaring up, and your own lungs burn. Complaining risks immediate lease termination.',
+                gastoniaNote: 'Gaston County Rental Property',
+                options: [
+                    {
+                        text: 'Report the mold to Code Enforcement. Landlord retaliates with a 30-day lease non-renewal notice.',
+                        cashDelta: 0,
+                        legalDelta: 0,
+                        stressDelta: 30,
+                        housingDelta: -40,
+                        feeExtracted: { name: 'Imminent Displacement Threat', amount: 0, reason: 'Reporting unsafe conditions triggers retaliation and housing instability.', societalCost: '$1,200 shelter system cost per family placement.' }
+                    },
+                    {
+                        text: 'Buy bleach and air purifiers out of pocket ($55.00) and keep quiet to protect your shelter.',
+                        cashDelta: -55.00,
+                        legalDelta: 0,
+                        stressDelta: 15,
+                        housingDelta: 5,
+                        feeExtracted: { name: 'Unsafe Housing Remediation Out-of-Pocket', amount: 55.00, reason: 'Tenant forced to absorb cost of severe habitability defects.', societalCost: 'Increased ER utilization for chronic asthma exacerbations.' }
+                    },
+                    {
+                        text: 'Let a friend store 2 large locked totes in your spare closet for $100 toward emergency air filters.',
+                        cashDelta: 100,
+                        legalDelta: -15,
+                        stressDelta: 20,
+                        housingDelta: 0,
+                        riskFlag: 'Contraband Risk',
+                        feeExtracted: { name: 'Unverified Storage Hazard', amount: 0, reason: 'Exposed household to potential probation search or lease violation.', societalCost: 'Probation violation process costs taxpayers over $2,500.' }
+                    }
+                ]
+            },
+            {
+                day: 3,
+                category: 'Transportation & Logistics',
+                title: 'Day 3: Transit Delay & Mandatory Attendance',
+                text: 'The Gastonia Transit bus line is running 45 minutes late due to construction on Franklin Blvd. You have a mandatory work shift or check-in in 15 minutes.',
+                gastoniaNote: 'Lineberger Transit Center Depot Area',
+                options: [
+                    {
+                        text: 'Call an emergency rideshare app ($26.50 surge price) to arrive on time.',
+                        cashDelta: -26.50,
+                        legalDelta: 0,
+                        stressDelta: -10,
+                        housingDelta: 0,
+                        feeExtracted: { name: 'Rideshare Emergency Surge Fee', amount: 26.50, reason: 'Unreliable transit forces expensive private transportation spend.', societalCost: 'Lost worker productivity due to municipal transit gaps.' }
+                    },
+                    {
+                        text: 'Wait for the bus and accept a late strike from your supervisor/officer.',
+                        cashDelta: 0,
+                        legalDelta: -20,
+                        stressDelta: 25,
+                        housingDelta: -5,
+                        feeExtracted: null
+                    },
+                    {
+                        text: 'Accept a ride from a neighbor driving an unregistered car without a valid license.',
+                        cashDelta: 0,
+                        legalDelta: -5,
+                        stressDelta: 10,
+                        housingDelta: 0,
+                        riskFlag: 'Traffic Stop Danger',
+                        feeExtracted: { name: 'Unlicensed Transport Exposure', amount: 0, reason: 'Risked traffic stop with unregistered vehicle to avoid tardiness.', societalCost: '$250 court filing cost for traffic citations.' }
+                    }
+                ]
+            },
+            {
+                day: 4,
+                category: 'Financial Banking Traps',
+                title: 'Day 4: Check Cashing & Account Sharing',
+                text: 'You earned $140 from short-term labor, but lack a standard bank account due to past background checks. You need cash today to pay household bills.',
+                gastoniaNote: 'Commercial Check Cashing Outlet',
+                options: [
+                    {
+                        text: 'Use a check-cashing store (6% fee + $3.50 out-of-network ATM fee = $11.90 total).',
+                        cashDelta: 128.10,
+                        legalDelta: 0,
+                        stressDelta: -5,
+                        housingDelta: 0,
+                        feeExtracted: { name: 'Unbanked Check Cashing & ATM Surcharge', amount: 11.90, reason: 'Lack of traditional banking access forces high predatory service fees.', societalCost: 'Perpetuates economic instability and reliance on public assistance.' }
+                    },
+                    {
+                        text: 'Deposit via mobile app with a strict 3-day hold (Zero cash available for 72 hours).',
+                        cashDelta: 0,
+                        legalDelta: 0,
+                        stressDelta: 20,
+                        housingDelta: -10,
+                        feeExtracted: null
+                    },
+                    {
+                        text: 'Allow an acquaintance to process a $300 online cash transfer through your mobile account for a $40 cut.',
+                        cashDelta: 40,
+                        legalDelta: -25,
+                        stressDelta: 15,
+                        housingDelta: 0,
+                        riskFlag: 'Account Fraud Lock',
+                        feeExtracted: { name: 'Peer Transfer Fraud Risk', amount: 0, reason: 'Peer transfer flagged as fraudulent 72 hours later; bank locks account.', societalCost: 'Law enforcement bank fraud inquiry overhead.' }
+                    }
+                ]
+            },
+            {
+                day: 5,
+                category: 'Healthcare & Compliance Demand',
+                title: 'Day 5: Random Drug Screen & Co-Pay',
+                text: 'Your probation officer calls at 8:15 AM demanding a random urine screening by 2:00 PM. The screening costs $30.00 out of pocket at the clinic.',
+                gastoniaNote: 'Gaston County Health & Human Services Clinic',
+                options: [
+                    {
+                        text: 'Pay the $30 drug screen fee and report immediately.',
+                        cashDelta: -30.00,
+                        legalDelta: 5,
+                        stressDelta: -5,
+                        housingDelta: 0,
+                        feeExtracted: { name: 'Mandatory Screening Fee', amount: 30.00, reason: 'Court-ordered compliance test billed directly to participant.', societalCost: 'Incarceration costs exceed $35,000 annually per person.' }
+                    },
+                    {
+                        text: 'Explain you cannot afford the $30 fee today. (Logged as a non-compliant missed test).',
+                        cashDelta: 0,
+                        legalDelta: -30,
+                        stressDelta: 30,
+                        housingDelta: 0,
+                        feeExtracted: null
+                    },
+                    {
+                        text: 'Work an under-the-table cash cleanup shift for $70, skipping the morning appointment.',
+                        cashDelta: 70,
+                        legalDelta: -25,
+                        stressDelta: 15,
+                        housingDelta: 5,
+                        feeExtracted: { name: 'Unauthorized Work Shift Penalty', amount: 0, reason: 'Took informal cash labor to survive, incurring a probation violation.', societalCost: '$1,500 cost for bench warrant processing.' }
+                    }
+                ]
+            },
+            {
+                day: 6,
+                category: 'Employment & Verification Fee',
+                title: 'Day 6: Mandatory Background & Uniform Cost',
+                text: 'A prospective employer is interested in hiring you, but requires you to pay for your own third-party background verification ($35.00) upfront.',
+                gastoniaNote: 'Local Employer Application Portal',
+                options: [
+                    {
+                        text: 'Pay the $35 background fee to submit the application.',
+                        cashDelta: -35.00,
+                        legalDelta: 0,
+                        stressDelta: -5,
+                        housingDelta: 5,
+                        feeExtracted: { name: 'Applicant Background Verification Fee', amount: 35.00, reason: 'Out-of-pocket barrier required just to apply for employment.', societalCost: 'Loss of taxable wages and increased public safety net reliance.' }
+                    },
+                    {
+                        text: 'Withdraw your application because you cannot spare the cash.',
+                        cashDelta: 0,
+                        legalDelta: 0,
+                        stressDelta: 15,
+                        housingDelta: -5,
+                        feeExtracted: null
+                    },
+                    {
+                        text: 'Pawn an old personal item or tool for $50 cash to cover the fee and gas money.',
+                        cashDelta: 15,
+                        legalDelta: 0,
+                        stressDelta: 10,
+                        housingDelta: 0,
+                        feeExtracted: { name: 'Pawn Finance Cost', amount: 35.00, reason: 'Asset liquidation at high interest to meet hiring entry fees.', societalCost: 'Depletion of household asset resilience.' }
+                    }
+                ]
+            }
+        ];
+
+        /**
+         * ====================================================================
+         * SIMULATOR STATE & ENGINE LOGIC
+         * ====================================================================
+         */
+        class ReentrySimulator {
+            constructor() {
+                this.activeCharacter = null;
+                this.currentDay = 1;
+                this.extractedFees = [];
+                this.isAutoPlay = false;
+                this.autoPlayTimer = null;
+            }
+
+            init() {
+                this.renderCharacterGrid(CHARACTERS);
+            }
+
+            filterCategory(cat) {
+                // Update active button styling
+                document.querySelectorAll('.cat-btn').forEach(btn => {
+                    btn.classList.remove('bg-amber-500', 'text-slate-950', 'font-bold', 'shadow');
+                    btn.classList.add('bg-slate-800', 'text-slate-300', 'border-slate-700');
+                });
+                event.target.classList.remove('bg-slate-800', 'text-slate-300', 'border-slate-700');
+                event.target.classList.add('bg-amber-500', 'text-slate-950', 'font-bold', 'shadow');
+
+                if (cat === 'all') {
+                    this.renderCharacterGrid(CHARACTERS);
+                } else {
+                    const filtered = CHARACTERS.filter(c => c.category === cat);
+                    this.renderCharacterGrid(filtered);
+                }
+            }
+
+            renderCharacterGrid(list) {
+                const grid = document.getElementById('characterGrid');
+                grid.innerHTML = list.map(c => `
+                    <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-5 shadow-xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-slate-800 text-amber-400 border border-slate-700">
+                                    ${c.badge}
+                                </span>
+                                <span class="text-xs text-slate-400 font-semibold">${c.age} yrs old</span>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold flex items-center justify-center text-xl shrink-0">
+                                    ${c.avatarInitials}
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">${c.name}</h3>
+                                    <p class="text-xs text-slate-400">${c.tagline}</p>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 bg-slate-950/50 p-3 rounded-xl border border-slate-850">
+                                ${c.bio}
+                            </p>
+                        </div>
+
+                        <div class="space-y-3 pt-2 border-t border-slate-800/80 mt-4">
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="bg-slate-950 p-2 rounded-lg text-slate-300 border border-slate-800">
+                                    <span class="text-slate-400 block text-[10px]">CASH ON HAND</span>
+                                    <span class="font-bold text-emerald-400">$${c.stats.cash}</span>
+                                </div>
+                                <div class="bg-slate-950 p-2 rounded-lg text-slate-300 border border-slate-800">
+                                    <span class="text-slate-400 block text-[10px]">LEGAL STANDING</span>
+                                    <span class="font-bold text-sky-400">${c.stats.legal}%</span>
+                                </div>
+                            </div>
+
+                            <button onclick="game.selectCharacter('${c.id}')" class="w-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white font-bold py-2.5 px-4 rounded-xl transition-all duration-200 text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                                <span>Play as ${c.name}</span>
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            selectCharacter(id) {
+                const charObj = CHARACTERS.find(c => c.id === id);
+                this.activeCharacter = JSON.parse(JSON.stringify(charObj)); // Deep copy
+                this.currentDay = 1;
+                this.extractedFees = [];
+                this.isAutoPlay = false;
+
+                this.showStage('gameStage');
+                this.updateMeters();
+                this.loadDayScenario(this.currentDay);
+            }
+
+            startAutoPlay() {
+                const randomChar = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+                this.selectCharacter(randomChar.id);
+                this.isAutoPlay = true;
+
+                // Trigger choices automatically after brief delay
+                this.scheduleAutoPlayChoice();
+            }
+
+            scheduleAutoPlayChoice() {
+                if (!this.isAutoPlay) return;
+                
+                this.autoPlayTimer = setTimeout(() => {
+                    const scenario = SCENARIOS.find(s => s.day === this.currentDay);
+                    if (scenario) {
+                        // Randomly pick option (weighted slightly towards compliance)
+                        const choiceIdx = Math.random() > 0.4 ? 0 : 1;
+                        this.makeChoice(choiceIdx);
+                    }
+                }, 2200);
+            }
+
+            loadDayScenario(dayNum) {
+                const scenario = SCENARIOS.find(s => s.day === dayNum);
+                if (!scenario) {
+                    this.finishSimulation();
+                    return;
+                }
+
+                // Update UI Labels
+                document.getElementById('dayIndicator').innerText = `Day ${dayNum} of 6`;
+                document.getElementById('dayNum').innerText = dayNum;
+                document.getElementById('scenarioCategory').innerText = scenario.category;
+                document.getElementById('gastoniaTag').innerHTML = `<i class="fa-solid fa-location-dot text-amber-400"></i> ${scenario.gastoniaNote}`;
+                document.getElementById('scenarioTitle').innerText = scenario.title;
+                document.getElementById('scenarioText').innerText = scenario.text;
+                document.getElementById('feeAlert').classList.add('hidden');
+
+                // Render Options
+                const optionsContainer = document.getElementById('optionsContainer');
+                optionsContainer.innerHTML = scenario.options.map((opt, idx) => `
+                    <button onclick="game.makeChoice(${idx})" class="w-full text-left bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/40 p-4 rounded-xl transition-all duration-200 group flex items-start gap-3">
+                        <span class="w-6 h-6 rounded-lg bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 text-slate-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                            ${idx + 1}
+                        </span>
+                        <span class="text-xs sm:text-sm text-slate-200 group-hover:text-white leading-relaxed">
+                            ${opt.text}
+                        </span>
+                    </button>
+                `).join('');
+
+                if (this.isAutoPlay) {
+                    this.scheduleAutoPlayChoice();
+                }
+            }
+
+            makeChoice(optionIndex) {
+                const scenario = SCENARIOS.find(s => s.day === this.currentDay);
+                const choice = scenario.options[optionIndex];
+
+                // Update Character Stats
+                this.activeCharacter.stats.cash = Math.max(0, this.activeCharacter.stats.cash + choice.cashDelta);
+                this.activeCharacter.stats.legal = Math.max(0, Math.min(100, this.activeCharacter.stats.legal + choice.legalDelta));
+                this.activeCharacter.stats.stress = Math.max(0, Math.min(100, this.activeCharacter.stats.stress + choice.stressDelta));
+                this.activeCharacter.stats.housing = Math.max(0, Math.min(100, this.activeCharacter.stats.housing + choice.housingDelta));
+
+                // Record Fee if applicable
+                if (choice.feeExtracted) {
+                    this.extractedFees.push(choice.feeExtracted);
+                    this.showFeeAlert(choice.feeExtracted);
+                }
+
+                this.updateMeters();
+
+                // Check for critical game over (Legal Standing hits 0)
+                if (this.activeCharacter.stats.legal <= 0) {
+                    setTimeout(() => {
+                        this.finishSimulation(true); // Revoked
+                    }, 1200);
+                    return;
+                }
+
+                // Advance Day
+                this.currentDay++;
+                if (this.currentDay <= 6) {
+                    setTimeout(() => {
+                        this.loadDayScenario(this.currentDay);
+                    }, choice.feeExtracted ? 1400 : 400);
+                } else {
+                    setTimeout(() => {
+                        this.finishSimulation(false);
+                    }, 1000);
+                }
+            }
+
+            showFeeAlert(feeObj) {
+                const feeAlert = document.getElementById('feeAlert');
+                const feeText = document.getElementById('feeAlertText');
+                feeText.innerText = `${feeObj.name} (-$${feeObj.amount.toFixed(2)}): ${feeObj.reason}`;
+                feeAlert.classList.remove('hidden');
+            }
+
+            updateMeters() {
+                const stats = this.activeCharacter.stats;
+
+                // Avatar Banner
+                document.getElementById('activeAvatar').innerText = this.activeCharacter.avatarInitials;
+                document.getElementById('activeName').innerText = this.activeCharacter.name;
+                document.getElementById('activeBadge').innerText = this.activeCharacter.badge;
+                document.getElementById('activeTagline').innerText = this.activeCharacter.tagline;
+
+                // Cash
+                document.getElementById('meterCashVal').innerText = `$${stats.cash.toFixed(2)}`;
+                document.getElementById('meterCashBar').style.width = `${Math.min(100, (stats.cash / 200) * 100)}%`;
+
+                // Legal
+                document.getElementById('meterLegalVal').innerText = `${stats.legal}%`;
+                document.getElementById('meterLegalBar').style.width = `${stats.legal}%`;
+
+                // Stress / Mental Well-being (Inverted visual: 100% stress = 0% well-being)
+                const wellBeing = Math.max(0, 100 - stats.stress);
+                document.getElementById('meterStressVal').innerText = `${wellBeing}%`;
+                document.getElementById('meterStressBar').style.width = `${wellBeing}%`;
+
+                // Housing
+                document.getElementById('meterHousingVal').innerText = `${stats.housing}%`;
+                document.getElementById('meterHousingBar').style.width = `${stats.housing}%`;
+            }
+
+            finishSimulation(revoked = false) {
+                clearTimeout(this.autoPlayTimer);
+                this.showStage('debriefStage');
+
+                // Total extracted fees calculation
+                const totalFees = this.extractedFees.reduce((sum, f) => sum + f.amount, 0);
+                document.getElementById('debriefFees').innerText = `$${totalFees.toFixed(2)}`;
+
+                // Final Cash
+                document.getElementById('debriefCash').innerText = `$${this.activeCharacter.stats.cash.toFixed(2)}`;
+
+                // Legal Status
+                const legalVal = this.activeCharacter.stats.legal;
+                document.getElementById('debriefLegal').innerText = `${legalVal}%`;
+                
+                const legalStatusElem = document.getElementById('debriefLegalStatus');
+                if (revoked || legalVal <= 20) {
+                    legalStatusElem.innerText = 'Critical Risk / Probation Revocation Notice';
+                    legalStatusElem.className = 'text-xs text-rose-400 font-bold block mt-1';
+                } else if (legalVal < 70) {
+                    legalStatusElem.innerText = 'Struggling with Sanctions & Warnings';
+                    legalStatusElem.className = 'text-xs text-amber-400 font-bold block mt-1';
+                } else {
+                    legalStatusElem.innerText = 'Maintained Compliance (At Extreme Cost)';
+                    legalStatusElem.className = 'text-xs text-emerald-400 font-bold block mt-1';
+                }
+
+                // Render Fee Ledger
+                const ledgerContainer = document.getElementById('feeLedgerList');
+                if (this.extractedFees.length === 0) {
+                    ledgerContainer.innerHTML = `<p class="text-slate-400 italic">No direct fees were paid, but legal sanctions, informal survival risks, or severe stress penalties were incurred instead.</p>`;
+                } else {
+                    ledgerContainer.innerHTML = this.extractedFees.map(f => `
+                        <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-white text-sm sm:text-base">${f.name}</span>
+                                <span class="font-bold text-rose-400 text-sm">${f.amount > 0 ? '-$' + f.amount.toFixed(2) : 'High Risk'}</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">${f.reason}</p>
+                            ${f.societalCost ? `
+                                <div class="text-[11px] text-amber-300/90 bg-amber-950/20 border border-amber-500/20 p-2 rounded-lg flex items-center gap-2">
+                                    <i class="fa-solid fa-scale-unbalanced text-amber-400"></i>
+                                    <span><strong>Societal / Taxpayer Cost:</strong> ${f.societalCost}</span>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('');
+                }
+            }
+
+            resetToStart() {
+                clearTimeout(this.autoPlayTimer);
+                this.activeCharacter = null;
+                this.currentDay = 1;
+                this.extractedFees = [];
+                this.isAutoPlay = false;
+                this.showStage('selectStage');
+            }
+
+            showStage(stageId) {
+                ['selectStage', 'gameStage', 'debriefStage'].forEach(id => {
+                    document.getElementById(id).classList.add('hidden');
+                });
+                document.getElementById(stageId).classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Initialize Simulator Engine on Window Load
+        let game;
+        window.onload = function () {
+            game = new ReentrySimulator();
+            game.init();
+        };
+    </script>
+</body>
+</html>
