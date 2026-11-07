@@ -536,56 +536,6 @@
         </section>
 
     </main>
-    WARP Blog Section: Architecture & Management Guide
-
-Adding a blog to your website gives WARP a powerful platform to share community impact stories, announce program updates, highlight statistics on recidivism and poverty in Gaston County, and boost your search engine ranking (SEO).
-
-🛠️ 1. How the Technical Process Works
-
-Because your website is a static site hosted via GitHub Pages, there are two primary ways to run your blog:
-
-Method A: Static HTML Articles (Recommended for Simplicity & Speed)
-
-How it works: Each blog post is either added directly into a <section> on your index.html page (as preview cards) or created as a standalone HTML page (e.g., blog/stay-close-impact.html).
-
-Pros: 100% free, blazingly fast load times, requires no extra databases or server subscriptions, and keeps full visual consistency with your custom site design.
-
-Cons: Adding a new post requires pasting a small block of HTML in GitHub.
-
-Method B: Headless CMS (Decoupled Management)
-
-How it works: You connect a free admin interface (like Netlify CMS, Decap CMS, or Sanity.io) to your GitHub repository.
-
-Pros: Gives you a user-friendly form editor (like WordPress) to type posts without touching code.
-
-Cons: Requires initial setup configuration and automated build pipelines.
-
-📝 2. How to Manage Posts Once Live (Static Method)
-
-Updating your blog using GitHub is straightforward once your template is in place.
-
-Adding a New Blog Post in 3 Steps:
-
-Open index.html on GitHub and locate the <!-- Blog / Stories Section --> area.
-
-Copy a Blog Card Template (provided below).
-
-Fill in your details:
-
-Title & Date: Update the article headline and publish date.
-
-Category Tag: (e.g., Impact Story, Digital Equity, Policy Update).
-
-Excerpt: Write 2-3 compelling summary sentences.
-
-Image: Set a image URL or placeholder.
-
-Click "Commit changes" to publish it live immediately.
-
-🎨 3. Copy-Paste Code Block for your index.html
-
-Here is the exact code block to paste into your index.html right before your <footer> tag:
-
 <!-- Community Impact & Stories / Blog Section -->
 <section id="blog" class="py-20 bg-slate-900 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
