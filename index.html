@@ -536,7 +536,187 @@
         </section>
 
     </main>
+    WARP Blog Section: Architecture & Management Guide
 
+Adding a blog to your website gives WARP a powerful platform to share community impact stories, announce program updates, highlight statistics on recidivism and poverty in Gaston County, and boost your search engine ranking (SEO).
+
+🛠️ 1. How the Technical Process Works
+
+Because your website is a static site hosted via GitHub Pages, there are two primary ways to run your blog:
+
+Method A: Static HTML Articles (Recommended for Simplicity & Speed)
+
+How it works: Each blog post is either added directly into a <section> on your index.html page (as preview cards) or created as a standalone HTML page (e.g., blog/stay-close-impact.html).
+
+Pros: 100% free, blazingly fast load times, requires no extra databases or server subscriptions, and keeps full visual consistency with your custom site design.
+
+Cons: Adding a new post requires pasting a small block of HTML in GitHub.
+
+Method B: Headless CMS (Decoupled Management)
+
+How it works: You connect a free admin interface (like Netlify CMS, Decap CMS, or Sanity.io) to your GitHub repository.
+
+Pros: Gives you a user-friendly form editor (like WordPress) to type posts without touching code.
+
+Cons: Requires initial setup configuration and automated build pipelines.
+
+📝 2. How to Manage Posts Once Live (Static Method)
+
+Updating your blog using GitHub is straightforward once your template is in place.
+
+Adding a New Blog Post in 3 Steps:
+
+Open index.html on GitHub and locate the <!-- Blog / Stories Section --> area.
+
+Copy a Blog Card Template (provided below).
+
+Fill in your details:
+
+Title & Date: Update the article headline and publish date.
+
+Category Tag: (e.g., Impact Story, Digital Equity, Policy Update).
+
+Excerpt: Write 2-3 compelling summary sentences.
+
+Image: Set a image URL or placeholder.
+
+Click "Commit changes" to publish it live immediately.
+
+🎨 3. Copy-Paste Code Block for your index.html
+
+Here is the exact code block to paste into your index.html right before your <footer> tag:
+
+<!-- Community Impact & Stories / Blog Section -->
+<section id="blog" class="py-20 bg-slate-900 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <div class="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 mb-3">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>Community News & Insights</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white serif-font tracking-tight">
+                    Stories from the Field
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base max-w-xl mt-2 font-light">
+                    Real stories of resilience, digital connectivity, and systemic change across Gaston County.
+                </p>
+            </div>
+            
+            <a href="#stay-close" class="inline-flex items-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 uppercase tracking-wider transition">
+                <span>View All Articles</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Blog Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Article Card 1 -->
+            <article class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition duration-300 group">
+                <div>
+                    <!-- Image / Header Thumbnail -->
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Stay Close Program Impact" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100" />
+                        <span class="absolute top-4 left-4 bg-amber-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                            Stay Close
+                        </span>
+                    </div>
+
+                    <div class="p-6 space-y-3">
+                        <div class="text-xs text-slate-400 flex items-center gap-2">
+                            <span>Nov 4, 2026</span>
+                            <span>•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition leading-snug">
+                            Bridging 500 Miles: How Tablet Access Reconnects Families
+                        </h3>
+                        <p class="text-slate-300 text-xs sm:text-sm line-clamp-3 leading-relaxed font-light">
+                            Discover how our direct digital equity initiative is providing incarcerated parents in regional facilities with structured connection time to help their children with homework.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-6 pt-0 border-t border-slate-900 mt-4 flex items-center justify-between">
+                    <span class="text-xs text-slate-400 font-medium">By WARP Team</span>
+                    <a href="#" class="text-xs text-amber-400 font-bold hover:underline flex items-center gap-1">
+                        Read Story <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article Card 2 -->
+            <article class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition duration-300 group">
+                <div>
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Gaston County Digital Equity" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100" />
+                        <span class="absolute top-4 left-4 bg-sky-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                            Digital Equity
+                        </span>
+                    </div>
+
+                    <div class="p-6 space-y-3">
+                        <div class="text-xs text-slate-400 flex items-center gap-2">
+                            <span>Oct 22, 2026</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition leading-snug">
+                            The Hidden Cost of Digital Exclusion in Gaston County
+                        </h3>
+                        <p class="text-slate-300 text-xs sm:text-sm line-clamp-3 leading-relaxed font-light">
+                            Without broadband access or hardware, returning citizens face impossible hurdles applying for employment and mandatory probation check-ins.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-6 pt-0 border-t border-slate-900 mt-4 flex items-center justify-between">
+                    <span class="text-xs text-slate-400 font-medium">By WARP Team</span>
+                    <a href="#" class="text-xs text-amber-400 font-bold hover:underline flex items-center gap-1">
+                        Read Story <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article Card 3 -->
+            <article class="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition duration-300 group">
+                <div>
+                    <div class="h-48 bg-slate-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="Candid Platinum Recognition" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100" />
+                        <span class="absolute top-4 left-4 bg-emerald-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                            Announcement
+                        </span>
+                    </div>
+
+                    <div class="p-6 space-y-3">
+                        <div class="text-xs text-slate-400 flex items-center gap-2">
+                            <span>Sep 15, 2026</span>
+                            <span>•</span>
+                            <span>3 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition leading-snug">
+                            WARP Awarded 2026 Candid Platinum Seal of Transparency
+                        </h3>
+                        <p class="text-slate-300 text-xs sm:text-sm line-clamp-3 leading-relaxed font-light">
+                            We are proud to announce that WARP has achieved the highest level of recognition on Candid, ensuring full financial clarity for our community supporters.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-6 pt-0 border-t border-slate-900 mt-4 flex items-center justify-between">
+                    <span class="text-xs text-slate-400 font-medium">By WARP Team</span>
+                    <a href="#" class="text-xs text-amber-400 font-bold hover:underline flex items-center gap-1">
+                        Read Story <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
     <!-- Footer -->
     <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800 text-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
